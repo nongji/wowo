@@ -3,7 +3,7 @@
     <parent>
         <artifactId>nongji-parent</artifactId>
         <groupId>cn.edu.hit.nongji</groupId>
-        <version>${nongji.version}</version>
+        <version>${project.version}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nongji-web</artifactId>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>cn.edu.hit.nongji</groupId>
             <artifactId>nongji-biz</artifactId>
-            <version>${nongji.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -33,8 +33,40 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>nongji-web</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources/base</directory>
+            </resource>
+            <resource>
+                <directory>${resource.directory}</directory>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <resource.directory>src/main/resources/test</resource.directory>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <resource.directory>src/main/resources/prod</resource.directory>
+            </properties>
+        </profile>
+    </profiles>
 </project>

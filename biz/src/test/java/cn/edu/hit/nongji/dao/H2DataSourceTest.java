@@ -10,6 +10,8 @@ import org.springframework.jdbc.support.JdbcUtils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fangwentong
@@ -23,7 +25,7 @@ public class H2DataSourceTest extends DaoTestBase {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Test
-    public void testH2DS() {
+    public void testH2Count() {
         long count = namedParameterJdbcTemplate.query("select count(*) from cdb.user;", new ResultSetExtractor<Long>() {
             @Override
             public Long extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -36,5 +38,20 @@ public class H2DataSourceTest extends DaoTestBase {
         });
         Assert.assertTrue(count > 0);
         logger.info("cdb.user cloumns count: {}", count);
+    }
+
+    @Test
+    public void testH2Select() {
+        List<String> userNames = new ArrayList<>();
+        namedParameterJdbcTemplate.query("select name from cdb.user limit 10;", new ResultSetExtractor<Void>() {
+            @Override
+            public Void extractData(ResultSet rs) throws SQLException, DataAccessException {
+                while (rs.next()) {
+                    userNames.add((String) JdbcUtils.getResultSetValue(rs, 1));
+                }
+                return null;
+            }
+        });
+        logger.info("User Names: {}", userNames);
     }
 }

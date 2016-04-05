@@ -7,12 +7,12 @@
     <groupId>cn.edu.hit.nongji</groupId>
     <artifactId>nongji-parent</artifactId>
     <packaging>pom</packaging>
-    <version>${nongji.version}</version>
+    <version>${project.version}</version>
     <description>Nongji Parent Project, Which contains nongji-web, nongji-common and nongji-biz</description>
 
     <properties>
         <spring.version>4.2.4.RELEASE</spring.version>
-        <nongji.version>0.0.1-SNAPSHOT</nongji.version>
+        <project.version>0.0.1-SNAPSHOT</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -63,6 +63,13 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.8.5</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -93,11 +100,18 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.191</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>0.9.1.2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.solr</groupId>
