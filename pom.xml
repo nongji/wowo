@@ -99,6 +99,11 @@
                 <artifactId>h2</artifactId>
                 <version>1.4.191</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>5.2.1</version>
+            </dependency>
             <!--日志相关-->
             <dependency>
                 <groupId>org.slf4j</groupId>

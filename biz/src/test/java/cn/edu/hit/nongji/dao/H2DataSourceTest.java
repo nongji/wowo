@@ -14,7 +14,7 @@ import java.sql.SQLException;
 /**
  * @author fangwentong
  * @title H2DataSourceTest
- * @desc TODO
+ * @desc H2 database test
  * @date 2016-04-05 10:17
  */
 
@@ -35,5 +35,6 @@ public class H2DataSourceTest extends DaoTestBase {
             }
         });
         Assert.assertTrue(count > 0);
+        logger.info("cdb.user cloumns count: {}", count);
     }
 }
