@@ -15,6 +15,4 @@
     <context:annotation-config/>
     <import resource="classpath:ctx-jdbc.xml"/>
 
-    <context:component-scan base-package="cn.edu.hit.nongji.dao"/>
-
 </beans>
