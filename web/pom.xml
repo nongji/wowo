@@ -37,6 +37,10 @@
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>nongji-web</finalName>
