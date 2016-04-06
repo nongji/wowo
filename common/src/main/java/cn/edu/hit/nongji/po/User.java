@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.po;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -132,5 +134,9 @@ public class User implements Serializable {
     public User setDomain(String domain) {
         this.domain = domain;
         return this;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

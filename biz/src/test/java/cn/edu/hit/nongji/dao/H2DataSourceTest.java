@@ -26,7 +26,7 @@ public class H2DataSourceTest extends DaoTestBase {
 
     @Test
     public void testH2Count() {
-        long count = namedParameterJdbcTemplate.query("select count(*) from cdb.user;", new ResultSetExtractor<Long>() {
+        long count = namedParameterJdbcTemplate.query("select count(*) from wowo.user;", new ResultSetExtractor<Long>() {
             @Override
             public Long extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next()) {
@@ -43,7 +43,7 @@ public class H2DataSourceTest extends DaoTestBase {
     @Test
     public void testH2Select() {
         List<String> userNames = new ArrayList<>();
-        namedParameterJdbcTemplate.query("select name from cdb.user limit 10;", new ResultSetExtractor<Void>() {
+        namedParameterJdbcTemplate.query("select name from wowo.user limit 10;", new ResultSetExtractor<Void>() {
             @Override
             public Void extractData(ResultSet rs) throws SQLException, DataAccessException {
                 while (rs.next()) {

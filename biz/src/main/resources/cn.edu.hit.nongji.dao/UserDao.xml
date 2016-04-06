@@ -4,6 +4,51 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.UserDao">
 
-    <cache/>
+    <select id="getUserById" resultType="User">
+        select *
+        from wowo.user
+        where id = #{id}
+    </select>
+    <select id="getUserByNumber" resultType="User">
+        select *
+        from wowo.user
+        where number = #{number}
+    </select>
+    <select id="getUserByName" resultType="User">
+        select *
+        from wowo.user
+        where name = #{name}
+    </select>
+    <select id="getUserByMobile" resultType="User">
+        select *
+        from wowo.user
+        where mobile = #{mobile}
+    </select>
+    <select id="getUserByEmail" resultType="User">
+        select *
+        from wowo.user
+        where email = #{email}
+    </select>
+    <select id="getUserByUserNameAndPassword" resultType="User">
+        select *
+        from wowo.user
+        where
+        name = #{param1} and
+        login_password = #{param2}
+    </select>
+    <select id="addUser" parameterType="User">
+        insert into wowo.user
+        (number, name, mobile, email, login_password, status, domain)
+        VALUES
+        (#{number}, #{name}, #{mobile}, #{email}, #{loginPassword}, #{status}, #{domain})
+        ON DUPLICATE KEY UPDATE
+        number = #{number},
+        name = #{name},
+        mobile = #{mobile},
+        email = #{email},
+        login_password = #{loginPassword},
+        status = #{status},
+        domain = #{domain}
 
+    </select>
 </mapper>

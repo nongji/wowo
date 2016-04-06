@@ -27,6 +27,10 @@ public class PageDto implements Serializable {
         }
     }
 
+    public static final int getMaxPageSize() {
+        return MAX_PAGE_SIZE;
+    }
+
     private Integer count;
     private Integer curPageCount;
     private Integer pageNum;
@@ -44,7 +48,7 @@ public class PageDto implements Serializable {
     }
 
     public void setCount(Integer count) {
-        if (count == null) {
+        if (count == null || count < 0) {
             count = 0;
         }
         this.count = count;
