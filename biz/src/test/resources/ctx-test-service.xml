@@ -14,5 +14,4 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="cn.edu.hit.nongji.service.impl"/>
-    <import resource="ctx-test-dao.xml"/>
 </beans>

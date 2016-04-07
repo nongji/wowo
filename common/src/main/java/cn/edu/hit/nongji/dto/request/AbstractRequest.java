@@ -1,11 +1,12 @@
 package cn.edu.hit.nongji.dto.request;
 
+import java.io.Serializable;
+
 /**
  * @author fangwentong
  * @title AbstractRequest
- * @desc TODO
  * @date 2016-04-04 23:31
  */
 
-public class AbstractRequest {
+public class AbstractRequest implements Serializable {
 }
