@@ -10,8 +10,16 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <mvc:annotation-driven/>
+
+    <!-- 静态资源处理 -->
+    <mvc:resources mapping="/public/**" location="/public/"/>
+    <mvc:resources mapping="/*.html" location="/"/>
+    <mvc:resources mapping="/favicon.ico" location="/public/favicon.ico"/>
+
     <context:annotation-config />
+    <import resource="classpath:ctx-jdbc.xml"/>
+    <context:component-scan base-package="cn.edu.hit.nongji.service"/>
     <context:component-scan base-package="cn.edu.hit.nongji.controller" />
-    <mvc:annotation-driven />
 
 </beans>

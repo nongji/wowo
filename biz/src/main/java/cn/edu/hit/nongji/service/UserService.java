@@ -6,7 +6,6 @@ import cn.edu.hit.nongji.po.User;
 /**
  * @author fangwentong
  * @title UserService
- * @desc TODO
  * @date 2016-04-04 23:30
  */
 

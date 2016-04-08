@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author fangwentong
  * @title PasswordUtilTest
- * @desc TODO
+ * @desc  对明文密码进行转化的算法
  * @date 2016-04-07 18:53
  */
 

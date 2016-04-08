@@ -30,7 +30,9 @@
         <property name="testConnectionOnCheckout" value="true"/>
         <property name="testConnectionOnCheckin" value="true"/>
         <property name="preferredTestQuery" value="select 1"/>
+        <!-- 设置SQL超时时间 -->
+        <property name="unreturnedConnectionTimeout" value="${jdbc.master.unreturnedConnectionTImeout:60}"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
     </bean>
 
 </beans>
-

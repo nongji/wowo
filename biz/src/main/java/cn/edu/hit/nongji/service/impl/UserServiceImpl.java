@@ -6,6 +6,7 @@ import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
 import cn.edu.hit.nongji.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author fangwentong
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2016-04-04 23:30
  */
 
+@Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
