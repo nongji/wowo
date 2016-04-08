@@ -2,14 +2,17 @@ package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
 import cn.edu.hit.nongji.dto.response.Response;
-import cn.edu.hit.nongji.enums.MobileResponseCode;
+import cn.edu.hit.nongji.dto.user.UserDetail;
+import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -36,25 +39,48 @@ public class UserController extends AbstractCommonController {
     @RequestMapping(value = "/signup", method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseBody
     public Response userSignUp(@RequestBody AddUserRequest request) {
-        userService.addUser(request);
-
-        MobileResponseCode status = MobileResponseCode.OK;
-        return new Response()
-                .setMsg(status.getDesc())
-                .setStatus(status.getCode());
+        try {
+            userService.addUser(request);
+            return successResponse();
+        } catch (Exception e) {
+            return internalServerError();
+        }
     }
 
-    @RequestMapping("*")
-    @ResponseBody
-    public String defaultController() {
-        return "Hello, World!";
+    @RequestMapping("/login")
+    public Response loginWithUsernameAndPassword(@RequestParam String username, @RequestParam String password) {
+        try {
+            User user = userService.getUserByUserNameAndPassword(username, password);
+            if (user != null) {
+                // set session infomation here.
+                return successResponse("登陆成功");
+            } else {
+                return inputErrorResponse("输入的用户名或密码有误.");
+            }
+        } catch (Exception e) {
+            return internalServerError();
+        }
     }
 
-    @RequestMapping("")
+    @RequestMapping("logout")
+    public Response logout() {
+        try {
+            // remove session infomation here
+            return successResponse("成功登出.");
+        } catch (Exception e) {
+            return internalServerError();
+        }
+    }
+
+    @RequestMapping("/{id}/detail")
+    public Response getDetail(@PathVariable long id) {
+        UserDetail detail = new UserDetail();
+        return successResponse().setData(detail);
+    }
+
+    @RequestMapping("*|")
     @ResponseBody
-    public Response defaultMainController() {
-        return new Response().setMsg("Hello, world")
-                .setStatus(MobileResponseCode.OK.getCode())
-                ;
+    public Response defaultController() {
+        return resourceNotFoundResponse();
     }
 }

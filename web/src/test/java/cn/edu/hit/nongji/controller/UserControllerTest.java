@@ -1,18 +1,36 @@
 package cn.edu.hit.nongji.controller;
 
+import cn.edu.hit.nongji.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.stereotype.Controller;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * @author fangwentong
  * @title UserControllerTest
- * @desc TODO
  * @date 2016-04-08 23:59
  */
-@Controller
-public class UserControllerTest {
+public class UserControllerTest extends ControllerTestBase {
+    @InjectMocks
+    private UserController userController;
+
+    @Mock
+    private UserService userService;
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
-    public void testCase() {
-        System.out.println("HELLO");
+    public void testSignUp() {
+
+    }
+
+    @Test
+    public void testGetUserByNameAndPasword() {
+        
     }
 }
