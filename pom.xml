@@ -7,12 +7,11 @@
     <groupId>cn.edu.hit.nongji</groupId>
     <artifactId>nongji-parent</artifactId>
     <packaging>pom</packaging>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <description>Nongji Parent Project, Which contains nongji-web, nongji-common and nongji-biz</description>
 
     <properties>
         <spring.version>4.2.5.RELEASE</spring.version>
-        <project.version>0.0.1-SNAPSHOT</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -21,6 +20,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -88,7 +88,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
-                <version>3.0.1</version>
+                <version>2.5</version>
             </dependency>
             <dependency>
                 <groupId>com.mchange</groupId>
@@ -136,6 +136,11 @@
             <version>1.9.13</version>
             </dependency>
             <!--日志相关-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.21</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
