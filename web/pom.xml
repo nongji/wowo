@@ -3,7 +3,7 @@
     <parent>
         <artifactId>nongji-parent</artifactId>
         <groupId>cn.edu.hit.nongji</groupId>
-        <version>${project.version}</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nongji-web</artifactId>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>cn.edu.hit.nongji</groupId>
             <artifactId>nongji-biz</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
