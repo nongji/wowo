@@ -1,6 +1,9 @@
 package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.response.Response;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.security.MessageDigest;
-import java.util.Objects;
 
 /**
  * @author fangwentong
@@ -27,17 +29,12 @@ public class WebHookController extends AbstractCommonController {
 
 
     public WebHookController() {
-        this(System.getenv("SECRET_KEY"));
-    }
-
-    public WebHookController(String secret) {
-        Objects.requireNonNull(secret, "No secret given.");
-        this.secret = secret;
+        this.secret = System.getenv("SECRET_KEY");
     }
 
     @RequestMapping("deploy")
     @ResponseBody
-    public Response deployApp(@RequestHeader("X-Hub-Signature") String signature,
+    public Response deployApp(@RequestHeader(value = "X-Hub-Signature", required = false) String signature,
                               @RequestBody String payload) {
         if (signature == null) {
             return inputErrorResponse("参数有误");
@@ -51,9 +48,17 @@ public class WebHookController extends AbstractCommonController {
             return permissionDenyResponse();
         }
 
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            Runtime.getRuntime().exec("wowo-deploy");
+            JsonNode node = mapper.readTree(payload);
+            if (!("refs/heads/master".equals(node.get("ref").asText()))) {
+                return successResponse("not the master branch, passed!");
+            }
+            Runtime.getRuntime().exec("/usr/bin/wowo-deploy");
             return successResponse("部署成功");
+        } catch (JsonProcessingException e) {
+            logger.error("Error while deploy: {}", e);
+            return internalServerError(e.getCause().toString());
         } catch (IOException e) {
             logger.error("Error while deploy: {}", e);
             return internalServerError(e.getCause().toString());
