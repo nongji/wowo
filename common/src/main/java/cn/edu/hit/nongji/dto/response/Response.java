@@ -14,6 +14,7 @@ public class Response implements Serializable {
     private int status;
     private Object data;
     private PageDto pageDto;
+    private String msg;
 
     public String getMsg() {
         return msg;
@@ -51,5 +52,4 @@ public class Response implements Serializable {
         return this;
     }
 
-    private String msg;
 }

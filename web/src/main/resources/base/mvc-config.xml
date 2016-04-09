@@ -16,6 +16,12 @@
     <mvc:resources mapping="/public/**" location="/public/"/>
     <mvc:resources mapping="/*.html" location="/"/>
     <mvc:resources mapping="/favicon.ico" location="/public/favicon.ico"/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <context:annotation-config />
     <import resource="classpath:ctx-jdbc.xml"/>

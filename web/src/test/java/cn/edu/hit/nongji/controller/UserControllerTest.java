@@ -26,11 +26,9 @@ public class UserControllerTest extends ControllerTestBase {
 
     @Test
     public void testSignUp() {
-
     }
 
     @Test
     public void testGetUserByNameAndPasword() {
-        
     }
 }

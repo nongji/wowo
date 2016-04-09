@@ -48,6 +48,7 @@ public class UserController extends AbstractCommonController {
     }
 
     @RequestMapping("/login")
+    @ResponseBody
     public Response loginWithUsernameAndPassword(@RequestParam String username, @RequestParam String password) {
         try {
             User user = userService.getUserByUserNameAndPassword(username, password);
@@ -58,11 +59,13 @@ public class UserController extends AbstractCommonController {
                 return inputErrorResponse("输入的用户名或密码有误.");
             }
         } catch (Exception e) {
+            logger.error(e.toString());
             return internalServerError();
         }
     }
 
     @RequestMapping("logout")
+    @ResponseBody
     public Response logout() {
         try {
             // remove session infomation here
@@ -73,12 +76,13 @@ public class UserController extends AbstractCommonController {
     }
 
     @RequestMapping("/{id}/detail")
+    @ResponseBody
     public Response getDetail(@PathVariable long id) {
         UserDetail detail = new UserDetail();
         return successResponse().setData(detail);
     }
 
-    @RequestMapping("*|")
+    @RequestMapping("*")
     @ResponseBody
     public Response defaultController() {
         return resourceNotFoundResponse();
