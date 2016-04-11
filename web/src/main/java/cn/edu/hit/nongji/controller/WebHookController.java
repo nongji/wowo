@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.security.MessageDigest;
  */
 
 @Controller
-@RequestMapping("/github")
+@RequestMapping(path = "/github")
 public class WebHookController extends AbstractCommonController {
     private static final int SIGNATURE_LENGTH = 45;
     private final String secret;
@@ -32,7 +33,7 @@ public class WebHookController extends AbstractCommonController {
         this.secret = System.getenv("SECRET_KEY");
     }
 
-    @RequestMapping("deploy")
+    @RequestMapping(path = "deploy", method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseBody
     public Response deployApp(@RequestHeader(value = "X-Hub-Signature", required = false) String signature,
                               @RequestBody String payload) {
@@ -42,7 +43,6 @@ public class WebHookController extends AbstractCommonController {
 
         String computed = String.format("sha1=%s", HmacUtils.hmacSha1Hex(secret, payload));
         boolean invalidLength = signature.length() != SIGNATURE_LENGTH;
-
 
         if (invalidLength || !MessageDigest.isEqual(signature.getBytes(), computed.getBytes())) {
             return permissionDenyResponse();

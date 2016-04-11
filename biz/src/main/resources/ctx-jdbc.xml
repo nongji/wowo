@@ -38,7 +38,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="masterDataSource"/>
         <property name="typeAliasesPackage" value="cn.edu.hit.nongji.po"/>
-        <property name="mapperLocations" value="classpath*:cn.edu.hit.nongji.dao/*.xml"/>
+        <property name="mapperLocations" value="classpath:cn.edu.hit.nongji.dao/*.xml"/>
     </bean>
 
     <!-- scan for mappers and let them be autowired -->

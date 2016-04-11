@@ -5,15 +5,19 @@
          version="2.5">
   <display-name>Wowo Nongji</display-name>
   <description>Online to Offline Agricultural Machinery Trading Platform</description>
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:application-config.xml</param-value>
+    <param-value>
+      classpath:application-config.xml
+    </param-value>
   </context-param>
 
   <listener>
-    <listener-class>org.springframework.web.context.ContextCleanupListener</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!-- 编码 filter start-->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -30,13 +34,63 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>*</url-pattern>
   </filter-mapping>
+  <!-- 编码 filter end-->
 
+  <!-- 日志filter start -->
+  <filter>
+    <filter-name>loggerFilter</filter-name>
+    <filter-class>cn.edu.hit.nongji.filter.LoggerFilter</filter-class>
+    <init-param>
+      <param-name>app</param-name>
+      <param-value>nongji</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>loggerFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
+  <!-- 日志filter end-->
+
+  <!-- 身份验证 start-->
+  <filter>
+    <filter-name>authTokenFilter</filter-name>
+    <filter-class>cn.edu.hit.nongji.filter.AuthTokenFilter</filter-class>
+    <init-param>
+      <param-name>excludes</param-name>
+      <param-value>
+        /user/login
+        /user/login.do
+      </param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>authTokenFilter</filter-name>
+    <url-pattern>/user/*</url-pattern>
+  </filter-mapping>
+  <!-- 身份验证 end -->
+
+  <!-- Spring Session 引入 -->
+  <filter>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- Spring Session filter end-->
+
+  <!-- 总的调度 -->
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:mvc-config.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>throwExceptionIfNoHandlerFound</param-name>
+      <param-value>true</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -52,10 +106,12 @@
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.action</url-pattern>
   </servlet-mapping>
+  <!-- 调度结束 -->
 
+  <!-- 错误页定义 -->
   <error-page>
     <error-code>404</error-code>
-    <location>/404.html</location>
+    <location>/404.jsp</location>
   </error-page>
 
   <welcome-file-list>
@@ -63,7 +119,7 @@
     <welcome-file>/index.jsp</welcome-file>
   </welcome-file-list>
   <session-config>
+    <!-- Session 超时时间, 单位: 分钟" -->
     <session-timeout>1440</session-timeout>
   </session-config>
-
 </web-app>

@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>404 Not Found</title>
+    <title>Document</title>
 </head>
 <body>
 <h1>Error 404.</h1>
+
 </body>
 </html>

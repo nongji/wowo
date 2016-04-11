@@ -13,7 +13,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <!-- TODO 为什么这里的配置不生效??? -->
     <import resource="classpath:ctx-jdbc.xml" />
+    <import resource="classpath:ctx-redis.xml"/>
+
     <context:component-scan base-package="cn.edu.hit.nongji.service"/>
+
+    <!-- Spring Data Redis-->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
 </beans>

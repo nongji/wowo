@@ -22,56 +22,56 @@ public abstract class AbstractCommonController {
      * @param s      description
      * @return Custom Response
      */
-    private Response responseForResponseStatus(ResponseStatus status, String s) {
+    private static Response responseForResponseStatus(ResponseStatus status, String s) {
         String msg = MoreObjects.firstNonNull(s, status.getDesc());
         return new Response().setStatus(status.getStatus()).setMsg(msg);
     }
 
-    Response successResponse() {
+    public static Response successResponse() {
         return successResponse(null);
     }
 
-    Response successResponse(String msg) {
+    public static Response successResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.OK, msg);
     }
 
-    Response invalidTokenResponse() {
+    public static Response invalidTokenResponse() {
         return invalidTokenResponse(null);
     }
 
-    Response invalidTokenResponse(String msg) {
+    public static Response invalidTokenResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.INVALID_AUTHTOKEN, msg);
     }
 
-    Response permissionDenyResponse() {
+    public static Response permissionDenyResponse() {
         return permissionDenyResponse(null);
     }
 
-    Response permissionDenyResponse(String msg) {
+    public static Response permissionDenyResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.PERMISSION_DENYED, msg);
     }
 
-    Response resourceNotFoundResponse() {
+    public static Response resourceNotFoundResponse() {
         return resourceNotFoundResponse(null);
     }
 
-    Response resourceNotFoundResponse(String msg) {
+    public static Response resourceNotFoundResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.RESOURCE_NOT_FOUND, msg);
     }
 
-    Response inputErrorResponse() {
+    public static Response inputErrorResponse() {
         return inputErrorResponse(null);
     }
 
-    Response inputErrorResponse(String msg) {
+    public static Response inputErrorResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.INPUT_ERROR, msg);
     }
 
-    Response internalServerError() {
+    public static Response internalServerError() {
         return internalServerError(null);
     }
 
-    Response internalServerError(String msg) {
+    public static Response internalServerError(String msg) {
         return responseForResponseStatus(ResponseStatus.INTERNAL_SERVER_ERROR, msg);
     }
 }

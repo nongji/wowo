@@ -60,6 +60,7 @@
     </build>
     <dependencyManagement>
         <dependencies>
+            <!-- Spring 相关 -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
@@ -86,9 +87,49 @@
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>1.6.2.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-aop</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-tx</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-beans</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>4.0.1.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session</artifactId>
+                <version>1.1.1.RELEASE</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>2.5</version>
+            </dependency>
+            <!-- 数据源系列 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.7.3</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.21</version>
             </dependency>
             <dependency>
                 <groupId>com.mchange</groupId>
@@ -106,11 +147,6 @@
                 <version>3.3.1</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.21</version>
-            </dependency>
-            <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>1.2.4</version>
@@ -120,10 +156,17 @@
                 <artifactId>solr-solrj</artifactId>
                 <version>5.5.0</version>
             </dependency>
+            <!-- Commons 系列 -->
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.4.2</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -144,6 +187,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.7.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>2.4.1</version>
             </dependency>
             <!--日志相关-->
             <dependency>
