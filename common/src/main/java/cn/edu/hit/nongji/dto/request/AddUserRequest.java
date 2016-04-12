@@ -11,20 +11,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class AddUserRequest extends AbstractRequest {
     private static final long serialVersionUID = 12221321421321L;
 
-    private String name;
+    private String username;
     private String mobile; // 手机
     private String email;  // 电子邮箱
-    private String loginPassword;  // 登陆密码
+    private String password;  // 登陆密码
     private String domain; // 个性域名;
 
-    public String getName() {
-        return name;
-    }
-
-    public AddUserRequest setName(String name) {
-        this.name = name;
-        return this;
-    }
 
     public String getMobile() {
         return mobile;
@@ -34,6 +26,20 @@ public class AddUserRequest extends AbstractRequest {
         this.mobile = mobile;
         return this;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public AddUserRequest setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -43,12 +49,12 @@ public class AddUserRequest extends AbstractRequest {
         return this;
     }
 
-    public String getLoginPassword() {
-        return loginPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public AddUserRequest setLoginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
+    public AddUserRequest setPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -60,7 +66,6 @@ public class AddUserRequest extends AbstractRequest {
         this.domain = domain;
         return this;
     }
-
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }

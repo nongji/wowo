@@ -33,6 +33,7 @@
             <mvc:mapping path="/user/*"/>
             <mvc:exclude-mapping path="/test/index"/>
             <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/signup"/>
             <ref bean="accessSecurityInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

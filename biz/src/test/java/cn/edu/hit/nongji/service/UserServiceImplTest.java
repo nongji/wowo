@@ -48,11 +48,9 @@ public class UserServiceImplTest extends ServiceTestBase {
 
     @Test
     public void testAddUser() {
-        AddUserRequest request = new AddUserRequest().setName("fangwentong")
-                .setLoginPassword("123456")
-                .setMobile("18011991234")
-                .setEmail("i@wentong.me")
-                .setDomain("fangwentong");
+        AddUserRequest request = new AddUserRequest().setUsername("fangwentong")
+                .setPassword("123456")
+                .setMobile("18011991234");
 
         userService.addUser(request);
     }

@@ -1,10 +1,12 @@
 package cn.edu.hit.nongji.controller;
 
+import cn.edu.hit.nongji.dto.TokenInfo;
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.dto.user.UserDetail;
 import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -36,57 +37,52 @@ public class UserController extends AbstractCommonController {
     /**
      * JSON接口, 添加新用户
      *
-     * @param request 添加用户请求
+     * @param user 添加用户请求
      * @return
      */
     @RequestMapping(value = "/signup", method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseBody
-    public Response userSignUp(@RequestBody AddUserRequest request) {
-        try {
-            userService.addUser(request);
-            return successResponse();
-        } catch (Exception e) {
-            return internalServerError();
+    public Response userSignUp(@RequestBody AddUserRequest user) {
+        if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())
+                || StringUtils.isEmpty(user.getMobile())) {
+            return inputErrorResponse("用户名, 密码和手机号码均不能为空.");
         }
+        userService.addUser(user);
+        return successResponse();
     }
 
     /**
      * 使用用户名和密码登陆
      *
-     * @param username
-     * @param password
+     * @param  request
      * @return
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Response loginWithUsernameAndPassword(@RequestParam String username, @RequestParam String password) {
-        try {
-            User user = userService.getUserByUserNameAndPassword(username, password);
-            if (user != null) {
-                // set session infomation here.
-                return successResponse("登陆成功");
-            } else {
-                return inputErrorResponse("输入的用户名或密码有误.");
-            }
-        } catch (Exception e) {
-            logger.error(e.toString());
-            return internalServerError();
+    public Response loginWithUsernameAndPassword(@RequestBody AddUserRequest request, HttpSession session) {
+        String username = request.getUsername();
+        String password = request.getPassword();
+        User user = userService.getUserByUserNameAndPassword(username, password);
+        if (user != null) {
+            // set session infomation here.
+            session.setAttribute("user_id", user.getId());
+            session.setAttribute("username", user.getName());
+            session.setAttribute("mobile", user.getMobile());
+            return successResponse("login successful.").setData(new TokenInfo(session.getId(), session.getMaxInactiveInterval()));
+        } else {
+            return inputErrorResponse("输入的用户名或密码有误.");
         }
     }
 
     @RequestMapping("logout")
     @ResponseBody
     public Response logout(HttpSession session) {
-        try {
-            Enumeration<String> paramNames = session.getAttributeNames();
-            // 清空session信息
-            while (paramNames.hasMoreElements()) {
-                session.removeAttribute(paramNames.nextElement());
-            }
-            return successResponse("成功登出.");
-        } catch (Exception e) {
-            return internalServerError();
+        Enumeration<String> paramNames = session.getAttributeNames();
+        // 清空session信息
+        while (paramNames.hasMoreElements()) {
+            session.removeAttribute(paramNames.nextElement());
         }
+        return successResponse("成功登出.");
     }
 
     /**

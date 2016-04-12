@@ -42,7 +42,6 @@
         VALUES
         (#{number}, #{name}, #{mobile}, #{email}, #{loginPassword}, #{status}, #{domain})
         ON DUPLICATE KEY UPDATE
-        number = #{number},
         name = #{name},
         mobile = #{mobile},
         email = #{email},

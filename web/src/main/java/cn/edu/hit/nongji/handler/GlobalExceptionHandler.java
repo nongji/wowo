@@ -35,8 +35,13 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public void handleException(HttpServletRequest req, Exception ex) {
+    public Response handleException(HttpServletRequest req, Exception ex) {
         logger.error("Error occurred, {}", ex);
+        if (logger.isDebugEnabled()) {
+            return AbstractCommonController.inputErrorResponse(ex.getMessage());
+        } else {
+            return AbstractCommonController.inputErrorResponse();
+        }
     }
 
     /**
