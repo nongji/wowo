@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,26 +26,43 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /**
+     * 通用异常处理, 仅打印错误日志
+     *
+     * @param req
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public Response handleException(HttpServletRequest req, Exception ex) {
-        logger.warn("Error occured, {}", ex);
-        if (logger.isDebugEnabled()) {
-            return AbstractCommonController.internalServerError("Returned by global exception handler." + ex.toString());
-        } else {
-            return AbstractCommonController.internalServerError();
-        }
+    public void handleException(HttpServletRequest req, Exception ex) {
+        logger.error("Error occurred, {}", ex);
     }
 
+    /**
+     * 404 Handler, 返回JSON
+     *
+     * @param req
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseBody
     public Response requestHandlingNoHandlerFound(HttpServletRequest req, NoHandlerFoundException ex) {
-        return AbstractCommonController.resourceNotFoundResponse();
+        return AbstractCommonController.resourceNotFoundResponse("oh, the resource you requested is not available now.");
     }
 
-    @ExceptionHandler(value = {HttpMessageNotReadableException.class, HttpMediaTypeNotSupportedException.class})
+    /**
+     * 客户端输入错误检查Hook, 返回json
+     *
+     * @param req
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(value = {HttpMessageNotReadableException.class, HttpMediaTypeNotSupportedException.class,
+            MissingServletRequestParameterException.class})
     @ResponseBody
     public Response requestError(HttpServletRequest req, Exception ex) {
-        return AbstractCommonController.inputErrorResponse();
+        return AbstractCommonController.inputErrorResponse("Data format error, please check it and retry.");
     }
 }

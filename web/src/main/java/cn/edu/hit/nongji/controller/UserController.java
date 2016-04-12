@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author fangwentong
  * @title UserController
@@ -47,6 +49,13 @@ public class UserController extends AbstractCommonController {
         }
     }
 
+    /**
+     * 使用用户名和密码登陆
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping("/login")
     @ResponseBody
     public Response loginWithUsernameAndPassword(@RequestParam String username, @RequestParam String password) {
@@ -66,7 +75,7 @@ public class UserController extends AbstractCommonController {
 
     @RequestMapping("logout")
     @ResponseBody
-    public Response logout() {
+    public Response logout(HttpSession session) {
         try {
             // remove session infomation here
             return successResponse("成功登出.");
@@ -75,16 +84,14 @@ public class UserController extends AbstractCommonController {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     */
     @RequestMapping("/{id}/detail")
     @ResponseBody
     public Response getDetail(@PathVariable long id) {
         UserDetail detail = new UserDetail();
         return successResponse().setData(detail);
-    }
-
-    @RequestMapping("*")
-    @ResponseBody
-    public Response defaultController() {
-        return resourceNotFoundResponse();
     }
 }

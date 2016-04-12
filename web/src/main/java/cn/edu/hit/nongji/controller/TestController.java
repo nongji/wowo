@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.controller;
 
+import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.po.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,5 +37,20 @@ public class TestController extends AbstractCommonController {
     @ResponseBody
     public String throwEx(@RequestBody User user) {
         return user.toString();
+    }
+
+    @RequestMapping("/index")
+    @ResponseBody
+    public Response name(HttpSession session) {
+        session.setAttribute("hello", "world");
+        return successResponse();
+    }
+
+    @RequestMapping("/session")
+    @ResponseBody
+    public Response get(HttpSession session) {
+        String world = (String) session.getAttribute("hello");
+        System.out.println("结果为:" + world);
+        return successResponse().setData("" + session.getAttribute("hello"));
     }
 }

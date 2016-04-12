@@ -28,6 +28,5 @@
 
     <context:annotation-config />
     <context:component-scan base-package="cn.edu.hit.nongji.controller" />
-    <context:component-scan base-package="cn.edu.hit.nongji.handler"/>
 
 </beans>

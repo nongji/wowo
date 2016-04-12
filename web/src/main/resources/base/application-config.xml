@@ -17,8 +17,15 @@
     <import resource="classpath:ctx-redis.xml"/>
 
     <context:component-scan base-package="cn.edu.hit.nongji.service"/>
+    <context:component-scan base-package="cn.edu.hit.nongji.handler"/>
 
-    <!-- Spring Data Redis-->
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    <!-- Spring Session 支持-->
+    <!-- 自定义Strategy -->
+    <bean id="customHttpSessionStrategy" class="cn.edu.hit.nongji.handler.CustomHttpSessionStrategy"/>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="redisNamespace" value="hit_wowo"/>
+        <property name="maxInactiveIntervalInSeconds" value="86400"/> <!-- Session保存一天 -->
+        <property name="httpSessionStrategy" ref="customHttpSessionStrategy"/>
+    </bean>
 
 </beans>

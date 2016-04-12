@@ -76,7 +76,11 @@
   </filter>
   <filter-mapping>
     <filter-name>springSessionRepositoryFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/user/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/test/*</url-pattern>
   </filter-mapping>
   <!-- Spring Session filter end-->
 
@@ -118,8 +122,4 @@
     <welcome-file>/index.html</welcome-file>
     <welcome-file>/index.jsp</welcome-file>
   </welcome-file-list>
-  <session-config>
-    <!-- Session 超时时间, 单位: 分钟" -->
-    <session-timeout>1440</session-timeout>
-  </session-config>
 </web-app>
