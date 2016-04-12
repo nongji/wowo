@@ -58,17 +58,14 @@ public class CustomHttpSessionStrategy implements HttpSessionStrategy {
         Cookie cookie = new Cookie(this.cookieName, session.getId());
         response.addCookie(cookie);
         logger.info("new Session, cookie: {}", cookie);
-
     }
 
-    private void writeResponse(ServletResponse servletResponse, Response response) throws IOException {
+    public static void writeResponse(ServletResponse servletResponse, Response response) throws IOException {
         servletResponse.setContentType("application/json; charset=utf-8");
         servletResponse.setCharacterEncoding("utf-8");
-
         PrintWriter out = servletResponse.getWriter();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValueAsString(response);
-
+        out.write(mapper.writeValueAsString(response));
     }
 
     public void onInvalidateSession(HttpServletRequest request, HttpServletResponse response) {

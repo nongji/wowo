@@ -43,6 +43,7 @@ public class TestController extends AbstractCommonController {
     @ResponseBody
     public Response name(HttpSession session) {
         session.setAttribute("hello", "world");
+        session.setAttribute("user_id", 1L);
         return successResponse();
     }
 

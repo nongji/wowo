@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 /**
  * @author fangwentong
@@ -77,7 +78,11 @@ public class UserController extends AbstractCommonController {
     @ResponseBody
     public Response logout(HttpSession session) {
         try {
-            // remove session infomation here
+            Enumeration<String> paramNames = session.getAttributeNames();
+            // 清空session信息
+            while (paramNames.hasMoreElements()) {
+                session.removeAttribute(paramNames.nextElement());
+            }
             return successResponse("成功登出.");
         } catch (Exception e) {
             return internalServerError();
