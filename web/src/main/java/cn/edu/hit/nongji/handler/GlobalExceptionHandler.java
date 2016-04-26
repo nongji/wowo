@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseBody
     public Response requestHandlingNoHandlerFound(HttpServletRequest req, NoHandlerFoundException ex) {
-        return AbstractCommonController.resourceNotFoundResponse("oh, the resource you requested is not available now.");
+        return AbstractCommonController.resourceNotFoundResponse();
     }
 
     /**

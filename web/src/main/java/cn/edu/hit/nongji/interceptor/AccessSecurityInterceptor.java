@@ -2,6 +2,7 @@ package cn.edu.hit.nongji.interceptor;
 
 import cn.edu.hit.nongji.controller.AbstractCommonController;
 import cn.edu.hit.nongji.handler.CustomHttpSessionStrategy;
+import cn.edu.hit.nongji.util.AuthTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author fangwentong
  * @title AccessSecurityInterceptor
- * @desc TODO
+ * @desc 通用访问拦截器
  * @date 2016-04-12 13:22
  */
 
@@ -25,16 +26,18 @@ public class AccessSecurityInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(false);
+        String authToken = AuthTokenUtil.getAuthToken((HttpServletRequest) request);
         // block user not logged in
-        logger.info("begin of inteceptor.session: {}", session);
-        if (session == null) {
-            CustomHttpSessionStrategy.writeResponse(response, AbstractCommonController.inputErrorResponse("请提供authToken."));
-        } else if (session.getAttribute("user_id") == null) {
+        if (authToken == null) {
+            CustomHttpSessionStrategy.writeResponse(response, AbstractCommonController.inputErrorResponse("请提供 AuthToken."));
+            return false;
+        } else if (session == null) {
+            logger.debug("Invalid AuthToken: {}.", authToken);
             CustomHttpSessionStrategy.writeResponse(response, AbstractCommonController.invalidTokenResponse());
             return false;
+        } else {
+            return true;
         }
-        logger.info("passing the access interceptor.");
-        return true;
     }
 
     @Override

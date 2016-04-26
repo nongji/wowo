@@ -23,3 +23,4 @@ CREATE TABLE wowo.user (
   UNIQUE KEY email_UNIQUE (email)
 ) /*ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息'*/;
 
+

@@ -11,7 +11,20 @@ import cn.edu.hit.nongji.po.User;
 
 public interface UserService {
 
+    /**
+     * 通过用户名和密码获取用户信息
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     User getUserByUserNameAndPassword(String username, String password);
 
+    /**
+     * 添加用户
+     *
+     * @param newUserRequest
+     */
     void addUser(AddUserRequest newUserRequest);
+
 }

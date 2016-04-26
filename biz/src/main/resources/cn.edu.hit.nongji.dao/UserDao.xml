@@ -36,7 +36,7 @@
         name = #{param1} and
         login_password = #{param2}
     </select>
-    <select id="addUser" parameterType="User">
+    <insert id="addUser" parameterType="User">
         insert into wowo.user
         (number, name, mobile, email, login_password, status, domain)
         VALUES
@@ -49,5 +49,8 @@
         status = #{status},
         domain = #{domain}
 
-    </select>
+    </insert>
+    <update id="updateUser">
+        
+    </update>
 </mapper>
