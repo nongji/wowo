@@ -20,6 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController extends AbstractCommonController {
+    @RequestMapping(value = {"/"})
+    public String index(@RequestParam(required = false) String name, HttpServletRequest req) {
+        name = MoreObjects.firstNonNull(name, "Vistor");
+        req.setAttribute("name", name);
+        return "sign/home";
+    }
+
     @RequestMapping(value = {"/hello"})
     public String sayHello(@RequestParam(required = false) String name, HttpServletRequest req) {
         name = MoreObjects.firstNonNull(name, "Vistor");

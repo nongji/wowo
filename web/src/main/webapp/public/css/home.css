@@ -1,0 +1,123 @@
+/**
+ * 主页 样式
+ */
+
+body {
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 36px;
+    line-height: normal;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: normal;
+    margin: auto;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #09F;
+}
+
+body {
+    background-color: rgb(60, 60, 60);
+    background-image: url(/public/images/theme/home.jpg)
+}
+
+.input-icon-container {
+    position: relative;
+}
+
+.input-icon-container .glyphicon {
+    color: gray;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.input-icon-container input,
+.input-icon-container textarea {
+    padding-left: 30px;
+}
+
+.login-form {
+    background-color: rgba(13, 13, 13, 0.25);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 300;
+    max-width: 650px;
+    padding: 0 30px 30px 30px;
+    margin: 30px auto 0 auto;
+}
+
+.login-form h1 {
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.login-form a {
+    color: #DBDBDB;
+}
+
+.login-form .form-control {
+    background-color: rgba(83, 78, 78, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.27);
+    color: rgb(255, 255, 255);
+}
+
+.login-form .form-group .control-label {
+    display: none
+}
+
+.login-form .input-icon-container .glyphicon {
+    color: rgb(190, 190, 190);
+}
+
+.login-form .control-label {
+    margin-bottom: 10px;
+}
+
+.login-form .btn {
+    width: 100%;
+}
+
+.login-form .btn-social {
+    max-width: 220px;
+}
+
+.login-form label {
+    font-weight: 400;
+}
+
+.login-form .form-field {
+    border-right: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.forgot-password-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.reset-container {
+    background-color: rgba(238, 238, 238, 0.6);
+    max-width: 800px;
+    margin-top: 50px;
+    border: 1px solid #eee;
+    padding-bottom: 50px;
+    border-radius: 10px;
+}
+
+.reset-container h1 {
+    padding: 15px 0;
+}
