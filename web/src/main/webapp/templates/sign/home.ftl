@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>${title!'fangwentong'} | ${var.siteName}</title>
+    <title>${title!'主页'} | ${var.siteName}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <link rel="chorcut icon" href="${var.assertBase}/favicon.ico">
     <link href="${var.assertBase}/css/bootstrap.min.css" rel="stylesheet">
@@ -24,10 +24,10 @@
                 <div class="col-md-6 form-field">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label for="username" class="control-label">电子邮箱</label>
+                            <label for="username" class="control-label">用户名或者手机号</label>
                             <div class="input-icon-container">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <input type="email" class="form-control" name="username" placeholder="电子邮箱" required
+                                <input type="text" class="form-control" name="username" placeholder="电子邮箱" required
                                        autofocus>
                             </div>
                         </div>
@@ -91,6 +91,15 @@
                 <div class="col-md-6 form-field">
                     <div class="form-group">
                         <div class="col-md-12">
+                            <label for="username" class="control-label">姓名</label>
+                            <div class="input-icon-container">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <input type="text" class="form-control" name="username" placeholder="姓名" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
                             <label for="email" class="control-label">Email</label>
                             <div class="input-icon-container">
                                 <i class="glyphicon glyphicon-send"></i>
@@ -100,10 +109,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label for="username" class="control-label">姓名</label>
+                            <label for="mobile" class="control-label">手机号码</label>
                             <div class="input-icon-container">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <input type="text" class="form-control" name="username" placeholder="姓名" required>
+                                <i class="glyphicon glyphicon-phone"></i>
+                                <input type="text" class="form-control" name="mobile" placeholder="手机号码" required>
                             </div>
                         </div>
                     </div>

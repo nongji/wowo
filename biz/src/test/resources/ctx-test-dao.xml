@@ -14,5 +14,4 @@
 
     <context:annotation-config/>
     <import resource="classpath:ctx-jdbc.xml"/>
-
 </beans>

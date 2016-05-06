@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.service.impl;
 
+import cn.edu.hit.nongji.dto.file.FilePath;
 import cn.edu.hit.nongji.service.FileSaveService;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.io.File;
 
 public class DiskFileSaveServiceImpl implements FileSaveService {
     @Override
-    public String save(File file, String originFileName) {
+    public FilePath save(File file, String originFileName) {
         return null;
     }
 }

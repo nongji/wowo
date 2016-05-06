@@ -19,11 +19,11 @@ public abstract class AbstractCommonController {
      * 根据给定的响应状态和描述(可选)生成Response
      *
      * @param status ResponseStatus
-     * @param s      description
+     * @param description      description
      * @return Custom Response
      */
-    private static Response responseForResponseStatus(ResponseStatus status, String s) {
-        String msg = MoreObjects.firstNonNull(s, status.getDesc());
+    private static Response responseForResponseStatus(ResponseStatus status, String description) {
+        String msg = MoreObjects.firstNonNull(description, status.getDesc());
         return new Response().setStatus(status.getStatus()).setMsg(msg);
     }
 
@@ -57,6 +57,14 @@ public abstract class AbstractCommonController {
 
     public static Response resourceNotFoundResponse(String msg) {
         return responseForResponseStatus(ResponseStatus.RESOURCE_NOT_FOUND, msg);
+    }
+
+    public static Response resourceAlreadyExistsResponse() {
+        return resourceNotFoundResponse(null);
+    }
+
+    public static Response resourceAlreadyExistsResponse(String msg) {
+        return responseForResponseStatus(ResponseStatus.RESOURCE_ALREADY_EXIST, msg);
     }
 
     public static Response inputErrorResponse() {

@@ -16,32 +16,28 @@ public class UserDaoTest extends DaoTestBase {
     private UserDao userDao;
 
     private User longJames = new User()
-            .setId(0).setNumber(800000L)
             .setName("longJames2")
             .setMobile("12820001201")
             .setEmail("longjames@longjames.me")
             .setLoginPassword("hello")
             .setStatus(1);
 
-    private void insertUser() {
-        userDao.addUser(longJames);
+    private long insertUser() {
+        return userDao.addUser(longJames);
     }
 
+    private void deleteUser() {
+        userDao.deleteUserByName(longJames.getName());
+    }
     @Test
     public void testGetUserById() {
         insertUser();
-        long id = userDao.getUserByNumber(longJames.getNumber()).getId();
+        long id = userDao.getUserByMobile(longJames.getMobile()).getId();
         User user = userDao.getUserById(id);
         Assert.assertNotNull(user);
         logger.info(user.toString());
-    }
-
-    @Test
-    public void testGetUserByNumber() {
-        insertUser();
-        User user = userDao.getUserByNumber(longJames.getNumber());
-        Assert.assertNotNull(user);
-        logger.info(user.toString());
+        deleteUser();
+        Assert.assertNull(userDao.getUserByMobile(longJames.getMobile()));
     }
 
     @Test
@@ -50,6 +46,7 @@ public class UserDaoTest extends DaoTestBase {
         User user = userDao.getUserByName(longJames.getName());
         Assert.assertNotNull(user);
         logger.info(user.toString());
+        deleteUser();
     }
 
     @Test
@@ -58,6 +55,7 @@ public class UserDaoTest extends DaoTestBase {
         User user = userDao.getUserByMobile(longJames.getMobile());
         Assert.assertNotNull(user);
         logger.info(user.toString());
+        deleteUser();
     }
 
     @Test
@@ -66,6 +64,7 @@ public class UserDaoTest extends DaoTestBase {
         User user = userDao.getUserByEmail(longJames.getEmail());
         Assert.assertNotNull(user);
         logger.info(user.toString());
+        deleteUser();
     }
 
     @Test
@@ -74,5 +73,26 @@ public class UserDaoTest extends DaoTestBase {
         User user = userDao.getUserByUserNameAndPassword(longJames.getName(), longJames.getLoginPassword());
         Assert.assertNotNull(user);
         logger.info(user.toString());
+        deleteUser();
+    }
+
+    @Test
+    public void testGetUserByKeyUniqueValue() {
+        insertUser();
+        Assert.assertNotNull(userDao.getUserByKeyUniqueValue(longJames.getName()));
+        Assert.assertNotNull(userDao.getUserByKeyUniqueValue(longJames.getMobile()));
+        Assert.assertNotNull(userDao.getUserByKeyUniqueValue(longJames.getEmail()));
+        deleteUser();
+    }
+
+    @Test
+    public void testUpdateUser() {
+        long id = insertUser();
+        String newMobile = "18511991234";
+        userDao.updateUser(new User().setId(id).setMobile(newMobile));
+        Assert.assertNotNull(userDao.getUserByMobile(newMobile));
+        logger.debug("\n\nUserId: {}\n\n", id);
+        logger.debug(userDao.getUserByMobile(newMobile).toString());
+        deleteUser();
     }
 }

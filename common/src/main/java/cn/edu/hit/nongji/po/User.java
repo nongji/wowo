@@ -18,7 +18,6 @@ public class User implements Serializable {
     private static final long serialVersionUID = 12221321421321L;
 
     private long id;
-    private long number;
     private String name;
     private String mobile; // 手机
     private Integer mobileVerify; // 手机验证状态
@@ -36,15 +35,6 @@ public class User implements Serializable {
 
     public User setId(long id) {
         this.id = id;
-        return this;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public User setNumber(long number) {
-        this.number = number;
         return this;
     }
 

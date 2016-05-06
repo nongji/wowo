@@ -19,14 +19,6 @@ public interface UserDao {
     User getUserById(long id);
 
     /**
-     * 通过number获取用户
-     *
-     * @param number
-     * @return
-     */
-    User getUserByNumber(long number);
-
-    /**
      * 通过用户名获取用户
      *
      * @param name
@@ -50,7 +42,24 @@ public interface UserDao {
      */
     User getUserByEmail(String email);
 
+    /**
+     * 通过用户名或者手机号码或者email查找用户, 用户登录或查找用户
+     *
+     * @param key 用户名/手机号码/email
+     * @return
+     */
+    User getUserByKeyUniqueValue(String key);
 
+    /**
+     * 通过用户名或者手机号码或者email查找用户
+     *
+     * @param username 用户名
+     * @param mobile   手机号码
+     * @param email    电子邮箱
+     * @return
+     */
+    User getUserByNameOrMobileOrEmail(String username, String mobile, String email);
+    
     /**
      * 根据用户名密码查找用户
      *
@@ -64,6 +73,21 @@ public interface UserDao {
      * 新建指定用户
      *
      * @param user
+     * @return id
      */
-    void addUser(User user);
+    long addUser(User user);
+
+    /**
+     * 根据用户名删除用户
+     *
+     * @param username
+     */
+    void deleteUserByName(String username);
+
+    /**
+     * 更新用户
+     *
+     * @param user 需要更新的用户信息, user.id 必须
+     */
+    void updateUser(User user);
 }

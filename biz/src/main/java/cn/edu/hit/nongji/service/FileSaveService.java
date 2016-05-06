@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.service;
 
+import cn.edu.hit.nongji.dto.file.FilePath;
+
 import java.io.File;
 
 /**
@@ -9,5 +11,5 @@ import java.io.File;
  * @date 2016-04-27 01:48
  */
 public interface FileSaveService {
-    String save(File file, String originFileName);
+     FilePath save(File file, String targetPath) throws Exception;
 }

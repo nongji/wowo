@@ -22,9 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController extends AbstractCommonController {
     @RequestMapping(value = {"/"})
     public String index(@RequestParam(required = false) String name, HttpServletRequest req) {
-        name = MoreObjects.firstNonNull(name, "Vistor");
-        req.setAttribute("name", name);
         return "sign/home";
+    }
+
+    @RequestMapping(value = {"/dashbaord", "/infocenter"})
+    public String showDashBoard() {
+        return "sign/dashboard";
     }
 
     @RequestMapping(value = {"/hello"})

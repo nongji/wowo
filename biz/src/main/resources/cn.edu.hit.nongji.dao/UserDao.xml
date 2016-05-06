@@ -9,26 +9,25 @@
         from wowo.user
         where id = #{id}
     </select>
-    <select id="getUserByNumber" resultType="User">
-        select *
-        from wowo.user
-        where number = #{number}
-    </select>
+
     <select id="getUserByName" resultType="User">
         select *
         from wowo.user
         where name = #{name}
     </select>
+
     <select id="getUserByMobile" resultType="User">
         select *
         from wowo.user
         where mobile = #{mobile}
     </select>
+
     <select id="getUserByEmail" resultType="User">
         select *
         from wowo.user
         where email = #{email}
     </select>
+
     <select id="getUserByUserNameAndPassword" resultType="User">
         select *
         from wowo.user
@@ -36,21 +35,73 @@
         name = #{param1} and
         login_password = #{param2}
     </select>
+
+    <select id="getUserByKeyUniqueValue" resultType="User">
+        select *
+        from wowo.user
+        where
+        name = #{param1} OR
+        mobile = #{param1} OR
+        email = #{param1}
+    </select>
+
+    <select id="getUserByNameOrMobileOrEmail" resultType="User">
+        select *
+        from wowo.user
+        <where>
+            1 = 0
+            <if test="param1 != null">
+                OR name = #{param1}
+            </if>
+            <if test="param2 != null">
+                OR mobile = #{param2}
+            </if>
+            <if test="param3 != null">
+                OR email = #{email}
+            </if>
+        </where>
+    </select>
+
     <insert id="addUser" parameterType="User">
         insert into wowo.user
-        (number, name, mobile, email, login_password, status, domain)
+        (name, mobile, email, login_password, status, domain)
         VALUES
-        (#{number}, #{name}, #{mobile}, #{email}, #{loginPassword}, #{status}, #{domain})
-        ON DUPLICATE KEY UPDATE
-        name = #{name},
-        mobile = #{mobile},
-        email = #{email},
-        login_password = #{loginPassword},
-        status = #{status},
-        domain = #{domain}
-
+        (#{name}, #{mobile}, #{email}, #{loginPassword}, #{status}, #{domain})
     </insert>
-    <update id="updateUser">
-        
+
+    <delete id="deleteUserByName">
+        delete from wowo.USER
+        where NAME = #{param1} limit 1;
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update wowo.user
+        <set>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="mobileVerify != null">
+                mobile_verify = #{mobileVerify},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="emailVerify != null">
+                email_verify = #{emailVerify},
+            </if>
+            <if test="loginPassword != null">
+                login_password = #{loginPassword},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="domain != null">
+                domain = #{domain}
+            </if>
+        </set>
+        WHERE id = #{id}
     </update>
 </mapper>

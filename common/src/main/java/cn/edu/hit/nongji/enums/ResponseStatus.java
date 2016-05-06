@@ -14,6 +14,7 @@ public enum ResponseStatus {
     PERMISSION_DENYED(40002, "没有权限"),
     RESOURCE_NOT_FOUND(40003, "资源不存在或已被移除"),
     INPUT_ERROR(40004, "用户输入有误"),
+    RESOURCE_ALREADY_EXIST(40005, "资源已经存在"),
 
     INTERNAL_SERVER_ERROR(50001, "服务器内部错误"),;
 

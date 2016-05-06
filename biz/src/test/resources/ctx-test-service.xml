@@ -13,5 +13,9 @@
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <context:annotation-config/>
+    <context:property-placeholder
+            location="classpath:wowo.properties"
+            ignore-unresolvable="true"/>
+    <import resource="ctx-test-dao.xml"/>
     <context:component-scan base-package="cn.edu.hit.nongji.service.impl"/>
 </beans>

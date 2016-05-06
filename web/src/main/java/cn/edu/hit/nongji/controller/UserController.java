@@ -2,6 +2,7 @@ package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.TokenInfo;
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
+import cn.edu.hit.nongji.dto.request.UpdateUserRequest;
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.dto.user.UserDetail;
 import cn.edu.hit.nongji.po.User;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
 
 /**
  * @author fangwentong
@@ -46,6 +47,18 @@ public class UserController extends AbstractCommonController {
         if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())
                 || StringUtils.isEmpty(user.getMobile())) {
             return inputErrorResponse("用户名, 密码和手机号码均不能为空.");
+        }
+        User u = userService.getUserByNameOrMobileOrEmail(user.getUsername(), user.getMobile(), user.getEmail());
+        if (u != null) {
+            if (u.getName() == user.getUsername()) {
+                return resourceAlreadyExistsResponse("用户名已存在");
+            } else if (u.getMobile() == user.getMobile()) {
+                return resourceAlreadyExistsResponse("手机号码已被绑定");
+            } else if (u.getEmail() == user.getEmail()) {
+                return resourceAlreadyExistsResponse("邮箱已被绑定");
+            } else {
+                return resourceAlreadyExistsResponse();
+            }
         }
         userService.addUser(user);
         return successResponse();
@@ -76,11 +89,11 @@ public class UserController extends AbstractCommonController {
 
     @RequestMapping("logout")
     @ResponseBody
-    public Response logout(HttpSession session) {
-        Enumeration<String> paramNames = session.getAttributeNames();
-        // 清空session信息
-        while (paramNames.hasMoreElements()) {
-            session.removeAttribute(paramNames.nextElement());
+    public Response logout(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            // 删除session信息
+            session.invalidate();
         }
         return successResponse("成功登出.");
     }
@@ -95,4 +108,20 @@ public class UserController extends AbstractCommonController {
         UserDetail detail = new UserDetail();
         return successResponse().setData(detail);
     }
+
+    @RequestMapping("/{id}/update")
+    @ResponseBody
+    public Response updateUserWithPathPara(@PathVariable long userId, @RequestBody UpdateUserRequest request) {
+        request.setUserId(userId);
+        userService.updateUser(request);
+        return successResponse("更新成功.");
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public Response updateUser(@RequestBody UpdateUserRequest request) {
+        userService.updateUser(request);
+        return successResponse("更新成功.");
+    }
+
 }

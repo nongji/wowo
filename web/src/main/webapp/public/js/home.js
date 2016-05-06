@@ -25,6 +25,14 @@ var isIdNumber = function (idNumber) {
     return parity[sum % 11] === codes[17];
 };
 
+var isPhoneNumber = function (phoneNumber) {
+    if (typeof phoneNumber != 'string') {
+        return false;
+    }
+    var phoneRegx = /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/;
+    return phoneRegx.test(phoneNumber);
+};
+
 var isPasswdValid = function (password) {
     if (typeof password !== 'string') {
         return false;
@@ -39,7 +47,7 @@ var postJsonData = function (url, params, success) {
             type: "POST",
             data: JSON.stringify(params),
             dataType: 'json',
-            async: false,
+            async: true,
             contentType: 'application/json; charset=utf-8',
             success: success
         }
@@ -63,10 +71,6 @@ $(function () {
         var username = form.find('[name="username"]').val();
         var password = form.find('[name="password"]').val();
         // validator
-        if (!isEmail(username)) {
-            alert('请输入有效的电子邮件地址!');
-            return false;
-        }
         if (!password) {
             alert('请输入密码');
             return false;
@@ -79,14 +83,18 @@ $(function () {
             },
             function (res) {
                 $btn.button('reset');
-                console.log(res);
-                alert(res.toString());
+                alert(res.msg);
+                if (res.status == 0) {
+                    location.href = "/infocenter";
+                }
+
             });
         return false;
     };
     var submitSignupForm = function (event) {
         var form = $(event.target).parents('#signup');
         var email = form.find('[name="email"]').val();
+        var phone = form.find('[name="mobile"]').val();
         var username = form.find('[name="username"]').val();
         var password = form.find('[name="password"]').val();
         var repassword = form.find('[name="repassword"]').val();
@@ -111,18 +119,25 @@ $(function () {
             alert('请输入正确的邮箱地址');
             return false;
         }
+        if (!isPhoneNumber(phone)) {
+            alert('手机号码不合法, 请检查后重试.');
+            return false;
+        }
         var $btn = $(this).button('loading');
 
         postJsonData('/user/signup',
             {
                 "username": username,
                 "password": password,
+                "mobile": phone,
                 "email": email,
             },
             function (res) {
                 $btn.button('reset');
-                console.log(res);
-                alert(res.toString());
+                alert(res.msg);
+                if (res.status == 0) {
+                    location.href = "#signin";
+                }
             });
         return false;
     };
