@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.HmacUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -12,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.util.Date;
 
 /**
  * @author fangwentong
@@ -54,14 +59,41 @@ public class WebHookController extends AbstractCommonController {
             if (!("refs/heads/master".equals(node.get("ref").asText()))) {
                 return successResponse("not the master branch, passed!");
             }
-            Process process = Runtime.getRuntime().exec("/usr/bin/wowo-deploy");
+            exec("/usr/bin/wowo-deploy");
             return successResponse("部署成功");
         } catch (JsonProcessingException e) {
             logger.error("Error while deploy: {}", e);
             return internalServerError(e.getCause().toString());
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             logger.error("Error while deploy: {}", e);
             return internalServerError(e.getCause().toString());
+        }
+    }
+
+    private void exec(String... cmds) throws IOException, InterruptedException {
+        String line;
+        Process process = Runtime.getRuntime().exec(cmds);  // 调用命令
+        process.waitFor();
+
+        BufferedReader reader = null;
+        FileWriter writer = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new FileWriter("project_update.log", true);
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.write("\n");
+            }
+            writer.write(String.format("\n\n\nProject updated at: {} .\n\n\n",
+                    DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss.SSS")));
+            writer.flush();
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+            if (reader != null) {
+                reader.close();
+            }
         }
     }
 }
