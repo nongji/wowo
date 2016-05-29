@@ -2,9 +2,9 @@ package cn.edu.hit.nongji.service;
 
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
 import cn.edu.hit.nongji.dto.request.UpdateUserRequest;
-import cn.edu.hit.nongji.enums.EmailVerifyStatus;
-import cn.edu.hit.nongji.enums.MobileVerifyStatus;
-import cn.edu.hit.nongji.enums.UserStatus;
+import cn.edu.hit.nongji.enums.user.EmailVerifyStatus;
+import cn.edu.hit.nongji.enums.user.MobileVerifyStatus;
+import cn.edu.hit.nongji.enums.user.UserStatus;
 import cn.edu.hit.nongji.po.User;
 
 /**

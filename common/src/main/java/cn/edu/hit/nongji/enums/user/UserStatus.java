@@ -1,4 +1,4 @@
-package cn.edu.hit.nongji.enums;
+package cn.edu.hit.nongji.enums.user;
 
 
 /**

@@ -3,6 +3,7 @@ package cn.edu.hit.nongji.service;
 import cn.edu.hit.nongji.dto.file.FilePath;
 import cn.edu.hit.nongji.service.impl.DiskFileServiceImpl;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,15 +19,18 @@ import static org.junit.Assert.assertNotNull;
  */
 
 public class FileDiskServiceTest extends ServiceTestBase {
-    DiskFileServiceImpl diskFileSaveService = new DiskFileServiceImpl();
+    @Autowired
+    DiskFileServiceImpl diskFileSaveService;
 
     @Test
     public void testSaveFile() throws IOException {
-        FilePath path = diskFileSaveService.save(createFileObject(), "helloworld");
+        File sourceFile = createFileObject();
+        FilePath path = diskFileSaveService.save(sourceFile, "helloworld");
         assertNotNull(path);
         assertNotNull(path.getRelativePath());
         assertNotNull(path.getRootPath());
         System.out.println(path);
+        sourceFile.delete();
     }
 
 

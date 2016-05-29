@@ -26,7 +26,6 @@ CREATE TABLE wowo.user (
 -- 农机机主信息
 
 CREATE TABLE wowo.machine_owner (
-
 );
 
 -- 农机基本信息表
@@ -78,5 +77,4 @@ CREATE TABLE wowo.user_login_log (
 -- 用户敏感操作纪录
 
 CREATE TABLE wowo.user_operation_log (
-
 );

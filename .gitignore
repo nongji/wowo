@@ -5,6 +5,7 @@
 .project
 .settings/
 target/
+uploads/
 .DS_Store
 logs/
 .idea
