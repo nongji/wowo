@@ -6,6 +6,7 @@ import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,21 +26,21 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     private String bucketName;
     @Value("${qiniu.key.prefix:}")
     private String keyPrefix;
-    @Value("${qiniu.domain}")
+    @Value("${qiniu.domain:}")
     private String qiniuDomain;
-    @Value("${qiniu.accessKey}")
+    @Value("${qiniu.accessKey:}")
     private String ACCESS_KEY;
-    @Value("${qiniu.secretKey}")
+    @Value("${qiniu.secretKey:}")
     private String SECRET_KEY;
     private Auth auth;
     private UploadManager uploadManager;
 
     @PostConstruct
     public void init() {
-        if (ACCESS_KEY == null) {
+        if (StringUtils.isEmpty(ACCESS_KEY)) {
             ACCESS_KEY = System.getenv("QINIU_ACCESS_KEY");
         }
-        if (SECRET_KEY == null) {
+        if (StringUtils.isEmpty(SECRET_KEY)) {
             SECRET_KEY = System.getenv("QINIU_SECRET_KEY");
         }
         auth = Auth.create(ACCESS_KEY, SECRET_KEY);

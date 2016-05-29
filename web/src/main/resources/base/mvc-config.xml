@@ -17,7 +17,7 @@
 
     <!-- 静态资源处理 -->
     <mvc:resources mapping="/public/**" location="/public/"/>
-    <mvc:resources mapping="/favicon.ico" location="/public/favicon.ico"/>
+    <mvc:resources mapping="/favicon.ico" location="/public/"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>

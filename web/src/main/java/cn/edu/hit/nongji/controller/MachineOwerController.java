@@ -1,6 +1,7 @@
 package cn.edu.hit.nongji.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author fangwentong
@@ -10,5 +11,6 @@ import org.springframework.stereotype.Controller;
  */
 
 @Controller
+@RequestMapping("/user")
 public class MachineOwerController extends AbstractCommonController {
 }

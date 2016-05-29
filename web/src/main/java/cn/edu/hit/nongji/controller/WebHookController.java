@@ -54,7 +54,7 @@ public class WebHookController extends AbstractCommonController {
             if (!("refs/heads/master".equals(node.get("ref").asText()))) {
                 return successResponse("not the master branch, passed!");
             }
-            Runtime.getRuntime().exec("/usr/bin/wowo-deploy");
+            Process process = Runtime.getRuntime().exec("/usr/bin/wowo-deploy");
             return successResponse("部署成功");
         } catch (JsonProcessingException e) {
             logger.error("Error while deploy: {}", e);
