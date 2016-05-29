@@ -2,6 +2,7 @@ package cn.edu.hit.nongji.handler;
 
 import cn.edu.hit.nongji.controller.AbstractCommonController;
 import cn.edu.hit.nongji.dto.response.Response;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -36,11 +37,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Response handleException(HttpServletRequest req, Exception ex) {
-        logger.error("Error occurred, {}", ex);
+        logger.error("Error occurred, {}", ExceptionUtils.getStackTrace(ex));
         if (logger.isDebugEnabled()) {
-            return AbstractCommonController.inputErrorResponse(ex.getMessage());
+            return AbstractCommonController.internalServerError(ex.getMessage());
         } else {
-            return AbstractCommonController.inputErrorResponse();
+            return AbstractCommonController.internalServerError();
         }
     }
 

@@ -60,7 +60,7 @@ public abstract class AbstractCommonController {
     }
 
     public static Response resourceAlreadyExistsResponse() {
-        return resourceNotFoundResponse(null);
+        return resourceAlreadyExistsResponse(null);
     }
 
     public static Response resourceAlreadyExistsResponse(String msg) {

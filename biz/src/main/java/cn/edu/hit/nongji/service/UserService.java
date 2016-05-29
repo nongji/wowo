@@ -60,6 +60,14 @@ public interface UserService {
     User getUserByEmail(String email);
 
     /**
+     * 根据用户id获取用户身份.
+     *
+     * @param userId 用户id
+     * @return
+     */
+    User getUserByUserId(long userId);
+
+    /**
      * 添加用户
      *
      * @param newUserRequest 添加用户请求

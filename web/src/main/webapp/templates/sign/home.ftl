@@ -24,7 +24,7 @@
                 <div class="col-md-6 form-field">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label for="username" class="control-label">用户名或者手机号</label>
+                            <label for="username" class="control-label">用户名/手机号/邮箱</label>
                             <div class="input-icon-container">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <input type="text" class="form-control" name="username" placeholder="电子邮箱" required
@@ -164,6 +164,99 @@
 <script src="${var.assertBase}/js/jquery.min.js?v=1.11.2"></script>
 <script src="${var.assertBase}/js/bootstrap.min.js?v=3.3.2"></script>
 <script src="${var.assertBase}/js/home.js?v=0.0.1"></script>
+<script>
+
+    $(function () {
+        var list = ['#login', '#signup'];
+        var trans = function () {
+            var hash = location.hash ? location.hash : '#login';
+            var index = list.indexOf(hash);
+            $(hash).show();
+            $(list[1 - index]).hide();
+        };
+        trans();
+        window.onhashchange = function () {
+            trans();
+        };
+        var submitLoginForm = function (event) {
+            var form = $(event.target).parents('#login');
+            var username = form.find('[name="username"]').val();
+            var password = form.find('[name="password"]').val();
+            // validator
+            if (!password) {
+                alert('请输入密码');
+                return false;
+            }
+            var $btn = $(this).button('loading');
+            postJsonData('/user/login',
+                    {
+                        "username": username,
+                        "password": password
+                    },
+                    function (res) {
+                        $btn.button('reset');
+                        alert(res.msg);
+                        if (res.status == 0) {
+                            location.href = "/infocenter";
+                        }
+
+                    });
+            return false;
+        };
+        var submitSignupForm = function (event) {
+            var form = $(event.target).parents('#signup');
+            var email = form.find('[name="email"]').val();
+            var phone = form.find('[name="mobile"]').val();
+            var username = form.find('[name="username"]').val();
+            var password = form.find('[name="password"]').val();
+            var repassword = form.find('[name="repassword"]').val();
+            // validator
+            if (!isEmail(email)) {
+                alert('请输入有效的电子邮件地址!');
+                return false;
+            }
+            if (!username) {
+                alert('请输入姓名');
+                return false;
+            }
+            if (!isPasswdValid(password)) {
+                alert('密码至少6位!');
+                return false;
+            }
+            if (password !== repassword) {
+                alert('密码不匹配');
+                return false;
+            }
+            if (!isEmail(email)) {
+                alert('请输入正确的邮箱地址');
+                return false;
+            }
+            if (!isPhoneNumber(phone)) {
+                alert('手机号码不合法, 请检查后重试.');
+                return false;
+            }
+            var $btn = $(this).button('loading');
+
+            postJsonData('/user/signup',
+                    {
+                        "username": username,
+                        "password": password,
+                        "mobile": phone,
+                        "email": email,
+                    },
+                    function (res) {
+                        $btn.button('reset');
+                        alert(res.msg);
+                        if (res.status == 0) {
+                            location.href = "#signin";
+                        }
+                    });
+            return false;
+        };
+        $('#login-btn').bind('click', submitLoginForm);
+        $('#signup-btn').bind('click', submitSignupForm);
+    });
+</script>
 <!-- Baidu Analytics -->
 <#include "../widgets/analytics.ftl" />
 </body>

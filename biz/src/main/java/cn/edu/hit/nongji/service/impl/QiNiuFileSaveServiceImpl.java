@@ -9,6 +9,7 @@ import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 /**
@@ -26,10 +27,24 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     private String keyPrefix;
     @Value("${qiniu.domain}")
     private String qiniuDomain;
-    private String ACCESS_KEY = System.getenv("QINIU_ACCESS_KEY");
-    private String SECRET_KEY = System.getenv("QINIU_SECRET_KEY");
-    private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-    private UploadManager uploadManager = new UploadManager();
+    @Value("${qiniu.accessKey}")
+    private String ACCESS_KEY;
+    @Value("${qiniu.secretKey}")
+    private String SECRET_KEY;
+    private Auth auth;
+    private UploadManager uploadManager;
+
+    @PostConstruct
+    public void init() {
+        if (ACCESS_KEY == null) {
+            ACCESS_KEY = System.getenv("QINIU_ACCESS_KEY");
+        }
+        if (SECRET_KEY == null) {
+            SECRET_KEY = System.getenv("QINIU_SECRET_KEY");
+        }
+        auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+        uploadManager = new UploadManager();
+    }
 
     String getUpToken() {
         System.out.println("bucketName: " + bucketName);
@@ -41,15 +56,18 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     }
 
     String getFileUrl(String targetPath) {
-        return qiniuDomain + "/" + keyPrefix + targetPath;
+        return getRootPath() + "/" + getFullKey(targetPath);
     }
 
+    String getRootPath() {
+        return qiniuDomain;
+    }
     @Override
     public FilePath save(File file, String targetPath) throws QiniuException {
         Response res = uploadManager.put(file, getFullKey(targetPath), getUpToken());
         if (res.isOK()) {
-            return new FilePath().setFullPath(getFileUrl(targetPath))
-                    .setPath(getFullKey(targetPath));
+            return new FilePath().setRelativePath(getRootPath())
+                    .setRelativePath(getFullKey(targetPath));
         } else {
             return null;
         }

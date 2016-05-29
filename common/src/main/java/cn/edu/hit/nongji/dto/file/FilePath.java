@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.dto.file;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -10,25 +12,28 @@ import java.io.Serializable;
  */
 
 public class FilePath implements Serializable {
-    String fullPath;
-    String path;
-    
-    public String getFullPath() {
-        return fullPath;
+    String rootPath;
+    String relativePath;
+
+    public String getRootPath() {
+        return rootPath;
     }
 
-    public FilePath setFullPath(String fullPath) {
-        this.fullPath = fullPath;
+    public FilePath setRootPath(String rootPath) {
+        this.rootPath = rootPath;
         return this;
     }
 
-    public String getPath() {
-        return path;
+    public String getRelativePath() {
+        return relativePath;
     }
 
-    public FilePath setPath(String path) {
-        this.path = path;
+    public FilePath setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
         return this;
     }
 
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

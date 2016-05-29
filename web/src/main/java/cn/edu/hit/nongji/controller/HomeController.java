@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author fangwentong
  * @title HomeController
- * @desc TODO
+ * @desc 主页面渲染控制器
  * @date 2016-04-25 20:20
  */
 
@@ -40,6 +40,16 @@ public class HomeController extends AbstractCommonController {
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String upload() {
         return "upload";
+    }
+
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
+    public String forgotPassword() {
+        return "sign/forgot_password";
+    }
+
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+    public String resetPassword() {
+        return "sign/reset_password";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

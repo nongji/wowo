@@ -7,7 +7,6 @@ import cn.edu.hit.nongji.util.AuthTokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.session.Session;
 import org.springframework.session.web.http.HttpSessionStrategy;
 import org.springframework.util.Assert;
@@ -27,14 +26,29 @@ import java.io.PrintWriter;
 
 public class CustomHttpSessionStrategy implements HttpSessionStrategy {
 
-    @Value("${session_timeout:86400}")
-    private static int sessionTimeoutSecond;
 
-    private static String headerName = "x-auth-token";
-    private static String queryStringKey = "authToken";
-    private static String cookieName = "AUTH_TOKEN";
+    private int sessionTimeoutSecond;
+
+    private String headerName = "x-auth-token";
+    private String queryStringKey = "authToken";
+    private String cookieName = "AUTH_TOKEN";
 
     private static final Logger logger = LoggerFactory.getLogger(CustomHttpSessionStrategy.class);
+
+    public CustomHttpSessionStrategy setSessionTimeoutSecond(int sessionTimeoutSecond) {
+        this.sessionTimeoutSecond = sessionTimeoutSecond;
+        return this;
+    }
+
+    public CustomHttpSessionStrategy setQueryStringKey(String queryStringKey) {
+        this.queryStringKey = queryStringKey;
+        return this;
+    }
+
+    public CustomHttpSessionStrategy setCookieName(String cookieName) {
+        this.cookieName = cookieName;
+        return this;
+    }
 
     public CustomHttpSessionStrategy() {
     }

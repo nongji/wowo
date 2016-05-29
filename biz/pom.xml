@@ -37,6 +37,11 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
+        <!-- Java Mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
         <!-- 七牛云SDK -->
         <dependency>
             <groupId>com.qiniu</groupId>

@@ -7,10 +7,11 @@ import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.dto.user.UserDetail;
 import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,11 +51,11 @@ public class UserController extends AbstractCommonController {
         }
         User u = userService.getUserByNameOrMobileOrEmail(user.getUsername(), user.getMobile(), user.getEmail());
         if (u != null) {
-            if (u.getName() == user.getUsername()) {
+            if (u.getName().equals(user.getUsername())) {
                 return resourceAlreadyExistsResponse("用户名已存在");
-            } else if (u.getMobile() == user.getMobile()) {
+            } else if (u.getMobile().equals(user.getMobile())) {
                 return resourceAlreadyExistsResponse("手机号码已被绑定");
-            } else if (u.getEmail() == user.getEmail()) {
+            } else if (u.getEmail().equals(user.getEmail())) {
                 return resourceAlreadyExistsResponse("邮箱已被绑定");
             } else {
                 return resourceAlreadyExistsResponse();
@@ -106,6 +107,21 @@ public class UserController extends AbstractCommonController {
     @ResponseBody
     public Response getDetail(@PathVariable long id) {
         UserDetail detail = new UserDetail();
+        return successResponse().setData(detail);
+    }
+
+    @RequestMapping("/detail/mine")
+    @ResponseBody
+    public Response getDetail(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        Assert.notNull(session, "Session information should not be null");
+        Long userId = (Long) session.getAttribute("user_id");
+        Assert.notNull(userId, "UserId can not be null");
+        User user = userService.getUserByUserId(userId);
+        UserDetail detail = new UserDetail().setUserId(user.getId())
+                .setPhone(user.getMobile())
+                .setName(user.getName())
+                .setStatus(user.getStatus());
         return successResponse().setData(detail);
     }
 

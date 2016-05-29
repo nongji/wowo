@@ -10,7 +10,7 @@ import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
 import cn.edu.hit.nongji.util.PasswordUtil;
 import com.google.common.base.MoreObjects;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +58,17 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return userDao.getUserByEmail(email);
+    }
+
+    /**
+     * 根据用户id获取用户身份.
+     *
+     * @param userId 用户id
+     * @return
+     */
+    @Override
+    public User getUserByUserId(long userId) {
+        return userDao.getUserById(userId);
     }
 
     @Override

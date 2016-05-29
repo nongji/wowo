@@ -3,6 +3,8 @@ CREATE SCHEMA wowo;
 
 SET MODE MYSQL; -- 设置MySQL模式
 
+-- 系统用户基本信息
+
 CREATE TABLE wowo.user (
   id             int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   name           varchar(45) NOT NULL DEFAULT '' COMMENT '用户名',
@@ -21,4 +23,60 @@ CREATE TABLE wowo.user (
   UNIQUE KEY email_UNIQUE (email)
 ) /*ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息'*/;
 
+-- 农机机主信息
 
+CREATE TABLE wowo.machine_owner (
+
+);
+
+-- 农机基本信息表
+
+CREATE TABLE wowo.machine (
+  id INT(11) NOT NULL AUTO_INCREMENT
+  COMMENT '自增主键',
+
+);
+
+-- 农机扩展信息表, 用于存放不常用和较大字段
+CREATE TABLE wowo.machine_ext (
+
+);
+
+-- 农机种类
+
+
+-- 驾照信息
+
+CREATE TABLE wowo.driver_license (
+
+);
+
+-- 位置信息
+
+CREATE TABLE wowo.area (
+
+);
+
+-- 审核记录表
+
+CREATE TABLE wowo.audit_history (
+
+);
+
+-- 用户评论表
+
+CREATE TABLE wowo.comment (
+
+);
+
+-- 用户登录日志
+
+CREATE TABLE wowo.user_login_log (
+
+);
+
+-- 用户敏感操作纪录
+
+CREATE TABLE wowo.user_operation_log (
+
+);

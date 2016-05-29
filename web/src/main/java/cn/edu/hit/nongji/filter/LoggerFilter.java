@@ -23,6 +23,16 @@ import java.io.IOException;
 public class LoggerFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggerFilter.class);
+    private String appName;
+
+    public LoggerFilter() {
+        this(null);
+    }
+
+    public LoggerFilter(String appName) {
+        super();
+        this.appName = appName;
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,7 +47,7 @@ public class LoggerFilter implements Filter {
         String path = request.getRequestURI();
         String authToken = AuthTokenUtil.getAuthToken(request);
         String method = request.getMethod();
-        logger.debug("Request from {}, Method {}, URL: {}, AuthToken: {}", addr, method, path, authToken);
+        logger.info("Request from {}, Method {}, URL: {}, AuthToken: {}", addr, method, path, authToken);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

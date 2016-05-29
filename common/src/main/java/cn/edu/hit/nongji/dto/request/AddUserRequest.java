@@ -1,6 +1,6 @@
 package cn.edu.hit.nongji.dto.request;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author fangwentong
@@ -25,10 +25,6 @@ public class AddUserRequest extends AbstractRequest {
     public AddUserRequest setMobile(String mobile) {
         this.mobile = mobile;
         return this;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getUsername() {
@@ -66,6 +62,7 @@ public class AddUserRequest extends AbstractRequest {
         this.domain = domain;
         return this;
     }
+
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
