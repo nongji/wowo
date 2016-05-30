@@ -56,7 +56,7 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     }
 
     String getUpToken() {
-        System.out.println("bucketName: " + bucketName);
+        logger.debug("bucketName: " + bucketName);
         return auth.uploadToken(bucketName);
     }
 

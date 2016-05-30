@@ -47,8 +47,8 @@ public class QiNiuFileSaveServiceTest extends ServiceTestBase {
         File file = new File("src/test/java/cn/edu/hit/nongji/service/ServiceTestBase.java");
         qiNiuFileSaveService.save(file, filename);
         assertTrue(qiNiuFileSaveService.isExists(filename));
-        qiNiuFileSaveService.delete(filename);
+        assertTrue(qiNiuFileSaveService.delete(filename));
         assertFalse(qiNiuFileSaveService.isExists(filename));
-
+        assertFalse(qiNiuFileSaveService.delete(filename));
     }
 }

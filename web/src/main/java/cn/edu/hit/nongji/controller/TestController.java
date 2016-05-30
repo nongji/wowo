@@ -4,6 +4,8 @@ import cn.edu.hit.nongji.dto.file.FilePath;
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.FileSaveService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,7 @@ public class TestController extends AbstractCommonController {
     @Autowired
     @Qualifier("diskFileServiceImpl")
     private FileSaveService fileSaveService;
+    private Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @ResponseBody
     @RequestMapping("get")
@@ -63,7 +66,7 @@ public class TestController extends AbstractCommonController {
     @ResponseBody
     public Response get(HttpSession session) {
         String world = (String) session.getAttribute("hello");
-        System.out.println("结果为:" + world);
+        logger.info("结果为:" + world);
         return successResponse().setData("" + session.getAttribute("hello"));
     }
 
