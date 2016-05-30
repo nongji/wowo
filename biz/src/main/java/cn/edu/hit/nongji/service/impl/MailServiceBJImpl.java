@@ -29,6 +29,7 @@ import java.util.Properties;
 /**
  * @author bjhl
  * @title MailServiceBJImpl
+ * @desc 邮件服务
  * @since 2016-05-27 22:39
  */
 

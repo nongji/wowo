@@ -3,7 +3,7 @@ package cn.edu.hit.nongji.controller;
 /**
  * @author fangwentong
  * @title DriverLisenceController
- * @desc TODO
+ * @desc 驾照控制器类
  * @since 2016-05-29 18:25
  */
 

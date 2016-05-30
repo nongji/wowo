@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @author fangwentong
  * @title UserDao
+ * @desc 用户信息数据访问对象
  * @date 2016-04-04 23:29
  */
 @Repository

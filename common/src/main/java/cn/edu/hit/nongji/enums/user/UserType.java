@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author fangwentong
  * @title UserType
- * @desc TODO
+ * @desc 用户类型
  * @since 2016-05-29 18:35
  */
 

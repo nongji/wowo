@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fangwentong
  * @title MachineManagementServiceImpl
- * @desc TODO
+ * @desc 农机管理服务
  * @since 2016-05-29 18:56
  */
 

@@ -12,5 +12,5 @@ import java.io.IOException;
  * @date 2016-04-27 01:48
  */
 public interface FileSaveService {
-    FilePath save(File file, String targetPath) throws IOException;
+    FilePath save(File file, String relativePath) throws IOException;
 }

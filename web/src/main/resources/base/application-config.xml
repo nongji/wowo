@@ -13,9 +13,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <context:property-placeholder location="classpath:wowo.properties" ignore-unresolvable="true"/>
     <import resource="classpath:ctx-jdbc.xml" />
     <import resource="classpath:ctx-redis.xml"/>
-    <context:property-placeholder location="classpath:wowo.properties"/>
 
     <context:component-scan base-package="cn.edu.hit.nongji.service"/>
     <context:component-scan base-package="cn.edu.hit.nongji.handler"/>

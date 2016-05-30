@@ -3,7 +3,7 @@ package cn.edu.hit.nongji.enums.user;
 /**
  * @author fangwentong
  * @title EmailVerifyStatus
- * @desc TODO
+ * @desc 电子邮箱验证状态
  * @date 2016-04-12 15:03
  */
 

@@ -17,12 +17,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 /**
  * @author fangwentong
  * @title DiskFileSaveServiceImpl
- * @desc TODO
+ * @desc 文件本地磁盘存储服务
  * @date 2016-04-27 01:52
  */
 
@@ -48,13 +47,11 @@ public class DiskFileServiceImpl implements FileSaveService {
     }
 
     @Override
-    public FilePath save(File file, String originFileName) throws IOException {
+    public FilePath save(File file, String relativeDir) throws IOException {
         String rootDir = Paths.get(baseDir).toAbsolutePath().toString(); // 根目录
-        String relativeDir = null;
         boolean isSaved = false;
         do {
             try {
-                relativeDir = generateFileName(originFileName); // 相对目录
                 logger.info("RootDir {}, relativeDir: {}", rootDir, relativeDir);
                 Path outputFilePath = Paths.get(rootDir, relativeDir); // 获取文件输出路径
                 writeFileToDisk(file, outputFilePath);
@@ -78,11 +75,4 @@ public class DiskFileServiceImpl implements FileSaveService {
         FileUtils.copyFile(sourceFile, outputFile);
     }
 
-    private String generateFileName(String originPath) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(UUID.randomUUID());
-        stringBuilder.append("-");
-        stringBuilder.append(originPath);
-        return stringBuilder.toString();
-    }
 }

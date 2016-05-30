@@ -21,7 +21,7 @@ import java.io.IOException;
 /**
  * @author fangwentong
  * @title TestController
- * @desc TODO
+ * @desc 测试控制器, 用于接口测试
  * @date 2016-04-11 18:00
  */
 

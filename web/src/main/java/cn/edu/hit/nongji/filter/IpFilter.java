@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @author fangwentong
  * @title IpFilter
- * @desc TODO
+ * @desc IP地址过滤器
  * @date 2016-04-28 15:33
  */
 

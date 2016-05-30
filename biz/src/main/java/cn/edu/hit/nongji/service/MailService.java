@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * @author fangwentong
  * @title MailService
- * @desc 发送邮件的接口
+ * @desc 发送邮件服务的接口
  * @since 2016-05-27 22:44
  */
 

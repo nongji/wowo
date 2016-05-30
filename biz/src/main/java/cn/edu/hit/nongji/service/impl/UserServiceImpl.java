@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fangwentong
  * @title UserServiceImpl
+ * @desc 用户基本信息管理服务
  * @date 2016-04-04 23:30
  */
 

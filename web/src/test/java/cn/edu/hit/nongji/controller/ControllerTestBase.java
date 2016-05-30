@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 /**
  * @author fangwentong
  * @title ControllerTestBase
- * @desc TODO
+ * @desc 控制器测试基类
  * @date 2016-04-09 02:06
  */
 

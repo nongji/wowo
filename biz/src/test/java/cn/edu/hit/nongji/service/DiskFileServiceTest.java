@@ -13,12 +13,12 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * @author fangwentong
- * @title FileDiskServiceTest
- * @desc TODO
+ * @title DiskFileServiceTest
+ * @desc Tests for class {@link DiskFileServiceImpl }
  * @since 2016-05-29 03:21
  */
 
-public class FileDiskServiceTest extends ServiceTestBase {
+public class DiskFileServiceTest extends ServiceTestBase {
     @Autowired
     DiskFileServiceImpl diskFileSaveService;
 

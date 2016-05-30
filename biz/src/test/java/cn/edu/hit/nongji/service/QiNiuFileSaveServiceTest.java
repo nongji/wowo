@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * @author fangwentong
  * @title QiNiuFileSaveServiceTest
- * @desc TODO
+ * @desc 七牛云文件存储服务 {@link QiNiuFileSaveServiceImpl } 测试
  * @date 2016-05-05 14:32
  */
 

@@ -59,8 +59,10 @@ public class WebHookController extends AbstractCommonController {
             if (!("refs/heads/master".equals(node.get("ref").asText()))) {
                 return successResponse("not the master branch, passed!");
             }
-            exec("/usr/bin/wowo-deploy");
-            return successResponse("部署成功");
+            String response = exec("sh", "/Users/tong/sandbox/test1");
+            logger.info(response);
+            return successResponse("部署成功")
+                    .setData(response);
         } catch (JsonProcessingException e) {
             logger.error("Error while deploy: {}", e);
             return internalServerError(e.getCause().toString());
@@ -70,8 +72,9 @@ public class WebHookController extends AbstractCommonController {
         }
     }
 
-    private void exec(String... cmds) throws IOException, InterruptedException {
+    private static String exec(String... cmds) throws IOException, InterruptedException {
         String line;
+        StringBuilder result = new StringBuilder();
         Process process = Runtime.getRuntime().exec(cmds);  // 调用命令
         process.waitFor();
 
@@ -81,10 +84,11 @@ public class WebHookController extends AbstractCommonController {
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             writer = new FileWriter("project_update.log", true);
             while ((line = reader.readLine()) != null) {
-                writer.write(line);
-                writer.write("\n");
+                result.append(line);
+                result.append("\n");
             }
-            writer.write(String.format("\n\n\nProject updated at: {} .\n\n\n",
+            writer.append(result.toString());
+            writer.append(String.format("\n\n\nProject updated at: %s.\n\n\n",
                     DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss.SSS")));
             writer.flush();
         } finally {
@@ -95,5 +99,6 @@ public class WebHookController extends AbstractCommonController {
                 reader.close();
             }
         }
+        return result.toString();
     }
 }

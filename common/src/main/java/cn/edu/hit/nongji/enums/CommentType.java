@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author fangwentong
  * @title CommentType
- * @desc TODO
+ * @desc 评论类型
  * @since 2016-05-30 00:03
  */
 

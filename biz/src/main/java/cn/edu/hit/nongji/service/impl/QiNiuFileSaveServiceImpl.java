@@ -7,6 +7,8 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ import java.io.File;
 /**
  * @author fangwentong
  * @title QiNiuFileSaveServiceImpl
- * @desc TODO
+ * @desc 七牛云文件存储服务接口
  * @date 2016-04-27 01:51
  */
 
@@ -34,6 +36,8 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     private String SECRET_KEY;
     private Auth auth;
     private UploadManager uploadManager;
+
+    private static final Logger logger = LoggerFactory.getLogger(QiNiuFileSaveServiceImpl.class);
 
     @PostConstruct
     public void init() {
@@ -63,6 +67,8 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     String getRootPath() {
         return qiniuDomain;
     }
+
+
     @Override
     public FilePath save(File file, String targetPath) throws QiniuException {
         Response res = uploadManager.put(file, getFullKey(targetPath), getUpToken());

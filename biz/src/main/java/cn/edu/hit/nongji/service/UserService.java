@@ -10,6 +10,7 @@ import cn.edu.hit.nongji.po.User;
 /**
  * @author fangwentong
  * @title UserService
+ * @desc 用户服务接口
  * @date 2016-04-04 23:30
  */
 

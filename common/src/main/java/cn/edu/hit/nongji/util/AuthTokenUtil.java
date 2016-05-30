@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author fangwentong
  * @title AuthTokenUtil
- * @desc TODO
+ * @desc AuthToken 工具类
  * @date 2016-04-12 10:54
  */
 

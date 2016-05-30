@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author fangwentong
  * @title OperationLoggerServiceImpl
- * @desc TODO
+ * @desc 用户操作记录服务
  * @since 2016-05-29 18:57
  */
 
