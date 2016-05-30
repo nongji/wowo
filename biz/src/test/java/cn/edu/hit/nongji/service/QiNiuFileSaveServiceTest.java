@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author fangwentong
  * @title QiNiuFileSaveServiceTest
@@ -27,11 +30,25 @@ public class QiNiuFileSaveServiceTest extends ServiceTestBase {
         } catch (QiniuException e) {
             logger.error(e.response.toString());
         }
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
+    }
 
-            }
-        });
+    @Test
+    public void testExists() throws QiniuException {
+        String filename = "hello";
+        if (qiNiuFileSaveService.isExists(filename)) {
+            qiNiuFileSaveService.delete(filename);
+        }
+        assertFalse(qiNiuFileSaveService.isExists(filename));
+    }
+
+    @Test
+    public void testDelete() throws QiniuException {
+        String filename = "ServiceTestBase.java";
+        File file = new File("src/test/java/cn/edu/hit/nongji/service/ServiceTestBase.java");
+        qiNiuFileSaveService.save(file, filename);
+        assertTrue(qiNiuFileSaveService.isExists(filename));
+        qiNiuFileSaveService.delete(filename);
+        assertFalse(qiNiuFileSaveService.isExists(filename));
+
     }
 }

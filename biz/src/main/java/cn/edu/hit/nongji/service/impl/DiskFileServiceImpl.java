@@ -49,23 +49,16 @@ public class DiskFileServiceImpl implements FileSaveService {
     @Override
     public FilePath save(File file, String relativeDir) throws IOException {
         String rootDir = Paths.get(baseDir).toAbsolutePath().toString(); // 根目录
-        boolean isSaved = false;
-        do {
-            try {
-                logger.info("RootDir {}, relativeDir: {}", rootDir, relativeDir);
-                Path outputFilePath = Paths.get(rootDir, relativeDir); // 获取文件输出路径
-                writeFileToDisk(file, outputFilePath);
-                isSaved = true;
-            } catch (FileExistsException e) {
-                logger.warn(e.toString());
-            }
 
-        } while (!isSaved);
+        Path outputFilePath = Paths.get(rootDir, relativeDir); // 获取文件输出路径
+        writeFileToDisk(file, outputFilePath);
+        logger.info("RootDir {}, relativeDir: {}, new file is saved.", rootDir, relativeDir);
 
         return new FilePath()
                 .setRootPath(rootDir)
                 .setRelativePath(relativeDir);
     }
+
 
     private void writeFileToDisk(File sourceFile, Path outputFilePath) throws IOException {
         File outputFile = outputFilePath.toFile();
@@ -73,6 +66,40 @@ public class DiskFileServiceImpl implements FileSaveService {
             throw new FileExistsException(outputFile.getAbsolutePath() + "is Already exsits");
         }
         FileUtils.copyFile(sourceFile, outputFile);
+    }
+
+    /**
+     * 删除指定路径的文件或目录
+     *
+     * @param relativePath 待删除文件的相对路劲
+     * @return 删除结果, 文件存在且成功删除返回true, 否则返回false
+     * @throws IOException
+     */
+    @Override
+    public boolean delete(String relativePath) throws IOException {
+        String rootDir = Paths.get(baseDir).toAbsolutePath().toString(); // 根目录
+
+        Path filePath = Paths.get(rootDir, relativePath); // 获取文件输出路径
+        if (filePath.toFile().exists()) {
+            filePath.toFile().delete();
+            logger.info("RootDir {}, relativeDir: {}, new file is deleted.", rootDir, relativePath);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 判断指定路径是否存在
+     *
+     * @param relativePath 待判断的路径
+     * @return 如果存在返回true, 不存在返回false
+     */
+    @Override
+    public boolean isExists(String relativePath) {
+        String rootDir = Paths.get(baseDir).toAbsolutePath().toString(); // 根目录
+        Path filePath = Paths.get(rootDir, relativePath); // 获取文件输出路径
+        return filePath.toFile().exists();
     }
 
 }

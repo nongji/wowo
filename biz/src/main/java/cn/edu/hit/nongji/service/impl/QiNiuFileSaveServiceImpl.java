@@ -4,7 +4,9 @@ import cn.edu.hit.nongji.dto.file.FilePath;
 import cn.edu.hit.nongji.service.FileSaveService;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * @author fangwentong
@@ -36,7 +39,7 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     private String SECRET_KEY;
     private Auth auth;
     private UploadManager uploadManager;
-
+    private BucketManager bucketManager;
     private static final Logger logger = LoggerFactory.getLogger(QiNiuFileSaveServiceImpl.class);
 
     @PostConstruct
@@ -49,6 +52,7 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
         }
         auth = Auth.create(ACCESS_KEY, SECRET_KEY);
         uploadManager = new UploadManager();
+        bucketManager = new BucketManager(auth);
     }
 
     String getUpToken() {
@@ -77,6 +81,44 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
                     .setRelativePath(getFullKey(targetPath));
         } else {
             return null;
+        }
+    }
+
+    /**
+     * 删除指定路径的文件或目录
+     *
+     * @param relativePath 待删除文件的相对路劲
+     * @return 删除结果, 文件存在且成功删除返回true, 否则返回false
+     * @throws IOException
+     */
+    @Override
+    public boolean delete(String relativePath) throws QiniuException {
+        if (isExists(relativePath)) {
+            bucketManager.delete(bucketName, getFullKey(relativePath));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 判断指定路径是否存在
+     *
+     * @param relativePath 待判断的路径
+     * @return 如果存在返回true, 不存在返回false
+     */
+    @Override
+    public boolean isExists(String relativePath) throws QiniuException {
+        try {
+            FileInfo fileInfo = bucketManager.stat(bucketName, getFullKey(relativePath));
+            return true;
+        } catch (QiniuException e) {
+            Response response = e.response;
+            if (response.statusCode == 612) {  // 612 为资源不存在的返回码
+                return false;
+            } else {
+                throw e;
+            }
         }
     }
 
