@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.service.impl;
 
+import cn.edu.hit.nongji.po.Comment;
 import cn.edu.hit.nongji.service.CommentService;
 
 /**
@@ -10,4 +11,33 @@ import cn.edu.hit.nongji.service.CommentService;
  */
 
 public class CommentServiceImpl implements CommentService {
+    @Override
+    public void addNewComment(Comment comment) {
+
+    }
+
+    @Override
+    public void deleteComment(Long commentId) {
+
+    }
+
+    @Override
+    public void hideComment(Long commentId) {
+
+    }
+
+    @Override
+    public void deleteCommentsByUserId(Long userId) {
+
+    }
+
+    @Override
+    public void deleteCommentsByCommenttedUserId(Long commenttedUserId) {
+
+    }
+
+    @Override
+    public void deleteCommentsByDemandId(Long demandId) {
+
+    }
 }

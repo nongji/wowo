@@ -5,6 +5,9 @@ import cn.edu.hit.nongji.enums.ResponseStatus;
 import com.google.common.base.MoreObjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 /**
  * @author fangwentong
@@ -81,5 +84,9 @@ public abstract class AbstractCommonController {
 
     public static Response internalServerError(String msg) {
         return responseForResponseStatus(ResponseStatus.INTERNAL_SERVER_ERROR, msg);
+    }
+
+    public File convertMultiPartFileToFile(MultipartFile multipartFile) {
+        return null;
     }
 }

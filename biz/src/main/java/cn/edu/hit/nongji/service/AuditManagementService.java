@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.service;
 
+import cn.edu.hit.nongji.po.AuditRecord;
+
 /**
  * @author fangwentong
  * @title AuditManagementService
@@ -8,4 +10,10 @@ package cn.edu.hit.nongji.service;
  */
 
 public interface AuditManagementService {
+
+    Long addNewAuditItem(AuditRecord auditRecord);
+
+    void setAuditStatusToSuccess(Long auditId);
+
+    void setAuditStatus(Long auditId, Integer newStatus);
 }

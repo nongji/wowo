@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.service;
 
+import cn.edu.hit.nongji.po.Comment;
+
 /**
  * @author fangwentong
  * @title CommentService
@@ -8,4 +10,16 @@ package cn.edu.hit.nongji.service;
  */
 
 public interface CommentService {
+
+    void addNewComment(Comment comment);
+
+    void deleteComment(Long commentId);
+
+    void hideComment(Long commentId);
+
+    void deleteCommentsByUserId(Long userId);
+
+    void deleteCommentsByCommenttedUserId(Long commenttedUserId);
+
+    void deleteCommentsByDemandId(Long demandId);
 }

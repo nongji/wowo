@@ -24,7 +24,7 @@ public enum UserStatus {
      * @return 暂时返回已激活状态
      */
     public static UserStatus getDefaultStatus() {
-        return ACTIVE;
+        return UNACTIVE;
     }
 
     public int getStatus() {

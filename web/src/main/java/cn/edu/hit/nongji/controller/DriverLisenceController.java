@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.controller;
 
+import org.springframework.stereotype.Controller;
+
 /**
  * @author fangwentong
  * @title DriverLisenceController
@@ -7,5 +9,6 @@ package cn.edu.hit.nongji.controller;
  * @since 2016-05-29 18:25
  */
 
-public class DriverLisenceController {
+@Controller
+public class DriverLisenceController extends AbstractCommonController {
 }

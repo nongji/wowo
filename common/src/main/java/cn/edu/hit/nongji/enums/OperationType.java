@@ -48,7 +48,7 @@ public enum OperationType {
         return this.desc;
     }
 
-    public OperationType fromType(int type) {
+    public static OperationType fromType(int type) {
         OperationType result = oprationTypeMap.get(type);
 
         if (result == null) {

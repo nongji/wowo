@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.service;
 
+import cn.edu.hit.nongji.po.DriverLicence;
+
 /**
  * @author fangwentong
  * @title DriverLicenseService
@@ -8,4 +10,7 @@ package cn.edu.hit.nongji.service;
  */
 
 public interface DriverLicenseService {
+    Long addDriverLicense(DriverLicence driverLicence);
+
+    void deleteDriverLicense(Long licenseId);
 }

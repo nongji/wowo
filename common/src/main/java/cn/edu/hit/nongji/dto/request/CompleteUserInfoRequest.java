@@ -104,7 +104,7 @@ public class CompleteUserInfoRequest extends AbstractRequest {
      * @return
      * @throws IOException
      */
-    public CompleteUserInfoRequest fromJsonString(String jsonString) throws IOException {
+    public static CompleteUserInfoRequest fromJsonString(String jsonString) throws IOException {
         return objectMapper.readValue(jsonString, CompleteUserInfoRequest.class);
     }
 

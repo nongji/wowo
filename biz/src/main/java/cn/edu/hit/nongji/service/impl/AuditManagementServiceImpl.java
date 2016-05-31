@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.service.impl;
 
+import cn.edu.hit.nongji.po.AuditRecord;
 import cn.edu.hit.nongji.service.AuditManagementService;
 
 /**
@@ -10,4 +11,18 @@ import cn.edu.hit.nongji.service.AuditManagementService;
  */
 
 public class AuditManagementServiceImpl implements AuditManagementService {
+    @Override
+    public Long addNewAuditItem(AuditRecord auditRecord) {
+        return null;
+    }
+
+    @Override
+    public void setAuditStatusToSuccess(Long auditId) {
+
+    }
+
+    @Override
+    public void setAuditStatus(Long auditId, Integer newStatus) {
+
+    }
 }

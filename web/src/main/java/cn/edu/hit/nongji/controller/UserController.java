@@ -1,8 +1,8 @@
 package cn.edu.hit.nongji.controller;
 
-import cn.edu.hit.nongji.dto.TokenInfo;
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
 import cn.edu.hit.nongji.dto.request.UpdateUserRequest;
+import cn.edu.hit.nongji.dto.response.LoginResultDto;
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.dto.user.UserDetail;
 import cn.edu.hit.nongji.po.User;
@@ -82,7 +82,15 @@ public class UserController extends AbstractCommonController {
             session.setAttribute("user_id", user.getId());
             session.setAttribute("username", user.getName());
             session.setAttribute("mobile", user.getMobile());
-            return successResponse("login successful.").setData(new TokenInfo(session.getId(), session.getMaxInactiveInterval()));
+            return successResponse("login successful.")
+                    .setData(new LoginResultDto()
+                            .setToken(session.getId())
+                            .setExpiresIn(session.getMaxInactiveInterval())
+                            .setName(user.getName())
+                            .setPhone(user.getMobile())
+                            .setStatus(user.getStatus())
+                            .setUserId(user.getId())
+                    );
         } else {
             return inputErrorResponse("输入的用户名或密码有误.");
         }

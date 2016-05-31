@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.service.impl;
 
+import cn.edu.hit.nongji.po.DriverLicence;
 import cn.edu.hit.nongji.service.DriverLicenseService;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DriverLicenseServiceImpl implements DriverLicenseService {
+    @Override
+    public Long addDriverLicense(DriverLicence driverLicence) {
+        return null;
+    }
+
+    @Override
+    public void deleteDriverLicense(Long licenseId) {
+
+    }
 }

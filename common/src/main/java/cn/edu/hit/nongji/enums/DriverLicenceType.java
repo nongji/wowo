@@ -5,12 +5,12 @@ import java.util.Map;
 
 /**
  * @author fangwentong
- * @title DriverLicence
+ * @title DriverLicenceType
  * @desc 驾照级别
  * @date 2016-04-28 18:46
  */
 
-public enum DriverLicence {
+public enum DriverLicenceType {
 
     UNKOWN(0, "未知", "无效驾照, 留作默认值"),
     C3_OR_MORE(1, "C3以上的驾照", "低速载货汽车（原四轮农用运输车、轻型载货汽车，车长小于6m，总质量小于4500kg"),
@@ -22,25 +22,25 @@ public enum DriverLicence {
     S(7, "S驾照", "持证人可驾驶悬挂式联合收割机"),
     T(8, "T驾照", "持证人可驾驶小型操纵杆自走式联合收割机");
 
-    int code;
+    int type;
     String desc;
     String detail;
-    static Map<Integer, DriverLicence> map = new HashMap<>();
+    static Map<Integer, DriverLicenceType> map = new HashMap<>();
 
     static {
-        for (DriverLicence licence : values()) {
-            map.put(licence.getCode(), licence);
+        for (DriverLicenceType licence : values()) {
+            map.put(licence.getType(), licence);
         }
     }
 
-    private DriverLicence(int code, String desc, String detail) {
-        this.code = code;
+    private DriverLicenceType(int type, String desc, String detail) {
+        this.type = type;
         this.desc = desc;
         this.detail = detail;
     }
 
-    public int getCode() {
-        return this.code;
+    public int getType() {
+        return this.type;
     }
 
     public String getDesc() {
@@ -51,9 +51,9 @@ public enum DriverLicence {
         return this.detail;
     }
 
-    public static DriverLicence fromCode(int code) {
-        if (map.containsKey(code)) {
-            return map.get(code);
+    public static DriverLicenceType fromType(int type) {
+        if (map.containsKey(type)) {
+            return map.get(type);
         } else {
             return UNKOWN;
         }
