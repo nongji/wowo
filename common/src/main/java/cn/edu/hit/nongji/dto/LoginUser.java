@@ -8,8 +8,8 @@ package cn.edu.hit.nongji.dto;
 
 public class LoginUser {
     String username;
-    String userId;
-    String userType;
+    Long userId;
+    Integer userType;
 
     public String getUsername() {
         return username;
@@ -20,20 +20,20 @@ public class LoginUser {
         return this;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public LoginUser setUserId(String userId) {
+    public LoginUser setUserId(Long userId) {
         this.userId = userId;
         return this;
     }
 
-    public String getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public LoginUser setUserType(String userType) {
+    public LoginUser setUserType(Integer userType) {
         this.userType = userType;
         return this;
     }

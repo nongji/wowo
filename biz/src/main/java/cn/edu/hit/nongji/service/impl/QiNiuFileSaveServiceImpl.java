@@ -77,8 +77,10 @@ public class QiNiuFileSaveServiceImpl implements FileSaveService {
     public FilePath save(File file, String targetPath) throws QiniuException {
         Response res = uploadManager.put(file, getFullKey(targetPath), getUpToken());
         if (res.isOK()) {
-            return new FilePath().setRelativePath(getRootPath())
+            FilePath path = new FilePath().setRootPath(getRootPath())
                     .setRelativePath(getFullKey(targetPath));
+            logger.info("New File {} is created", path);
+            return path;
         } else {
             return null;
         }

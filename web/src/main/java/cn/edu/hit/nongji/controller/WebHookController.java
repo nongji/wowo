@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,7 +34,7 @@ import java.util.Date;
 public class WebHookController extends AbstractCommonController {
     private static final int SIGNATURE_LENGTH = 45;
     private final String secret;
-
+    private static final Logger logger = LoggerFactory.getLogger(WebHookController.class);
 
     public WebHookController() {
         this.secret = System.getenv("SECRET_KEY");

@@ -2,6 +2,8 @@ package cn.edu.hit.nongji.service.impl;
 
 import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
 import cn.edu.hit.nongji.service.MachineOwnerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MachineOwnerServiceImpl implements MachineOwnerService {
+
+    private static final Logger logger = LoggerFactory.getLogger(MachineOwnerServiceImpl.class);
+
     @Override
     public Long completeUserInfo(CompleteUserInfoRequest completeUserInfoRequest) {
         return null;

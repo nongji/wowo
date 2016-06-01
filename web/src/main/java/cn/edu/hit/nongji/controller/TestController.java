@@ -33,7 +33,7 @@ public class TestController extends AbstractCommonController {
     @Autowired
     @Qualifier("diskFileServiceImpl")
     private FileSaveService fileSaveService;
-    private Logger logger = LoggerFactory.getLogger(TestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @ResponseBody
     @RequestMapping("get")

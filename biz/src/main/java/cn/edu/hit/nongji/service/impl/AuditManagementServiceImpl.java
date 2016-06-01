@@ -2,6 +2,8 @@ package cn.edu.hit.nongji.service.impl;
 
 import cn.edu.hit.nongji.po.AuditRecord;
 import cn.edu.hit.nongji.service.AuditManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author fangwentong
@@ -11,6 +13,8 @@ import cn.edu.hit.nongji.service.AuditManagementService;
  */
 
 public class AuditManagementServiceImpl implements AuditManagementService {
+    private static final Logger logger = LoggerFactory.getLogger(AuditManagementServiceImpl.class);
+
     @Override
     public Long addNewAuditItem(AuditRecord auditRecord) {
         return null;

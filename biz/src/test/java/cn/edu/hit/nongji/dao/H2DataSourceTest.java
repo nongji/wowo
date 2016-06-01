@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.JdbcUtils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -53,5 +54,20 @@ public class H2DataSourceTest extends DaoTestBase {
             }
         });
         logger.info("User Names: {}", userNames);
+    }
+
+    @Test
+    public void testShowCreateTable() {
+        namedParameterJdbcTemplate.update("insert into wowo.user (base_path, path) VALUES ('a', 'b')", Collections.emptyMap());
+        namedParameterJdbcTemplate.query("select * from wowo.assets;", new ResultSetExtractor<Void>() {
+            @Override
+            public Void extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (rs.next()) {
+                    System.out.println("\n\n\n");
+                    System.out.println(rs.getString(1));
+                }
+                return null;
+            }
+        });
     }
 }

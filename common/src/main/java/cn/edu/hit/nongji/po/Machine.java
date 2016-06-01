@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.po;
 
+import cn.edu.hit.nongji.dto.request.MachineRegisterRequest;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -16,9 +17,9 @@ public class Machine implements Serializable {
 
     Long id;
     Integer userType; // 用户类型
-    Integer driveTyep; // 驱动类型
+    Integer driveType; // 驱动类型
 
-    String drvierName; // 司机姓名
+    String driverName; // 司机姓名
     Integer driverAge;  // 司机年龄
     Integer driverGender; // 司机性别
 
@@ -64,21 +65,21 @@ public class Machine implements Serializable {
         return this;
     }
 
-    public Integer getDriveTyep() {
-        return driveTyep;
+    public Integer getDriveType() {
+        return driveType;
     }
 
-    public Machine setDriveTyep(Integer driveTyep) {
-        this.driveTyep = driveTyep;
+    public Machine setDriveType(Integer driveType) {
+        this.driveType = driveType;
         return this;
     }
 
-    public String getDrvierName() {
-        return drvierName;
+    public String getDriverName() {
+        return driverName;
     }
 
-    public Machine setDrvierName(String drvierName) {
-        this.drvierName = drvierName;
+    public Machine setDriverName(String driverName) {
+        this.driverName = driverName;
         return this;
     }
 
@@ -256,5 +257,35 @@ public class Machine implements Serializable {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public static Machine fromMachineRegisterRequest(MachineRegisterRequest request) {
+        Machine result = new Machine();
+
+        result.setUserType(request.getUserType())
+                .setDriveType(request.getDriveType())
+                .setDriverName(request.getDriverName())
+                .setDriverAge(request.getDriverAge())
+                .setDriverGender(request.getDriverGender())
+                .setLicenseType(request.getLicenseType())
+                .setMachineType(request.getMachineType())
+                .setMachineName(request.getMachineName())
+                .setMachinePower(request.getMachinePower())
+                .setPassengerNum(request.getPassengerNum())
+                .setWheelDistance(request.getWheelDistance())
+                .setCheckTime(request.getCheckTime())
+                .setPayType(request.getPayType())
+                .setLeaseMonth(request.getLeaseMonth())
+                .setLeaseTime(request.getLeaseTime())
+                .setWorkCondition(request.getWorkCondition())
+                .setNeedType(request.getNeedType())
+                .setWithItem(request.getWithItem())
+                .setHouseType(request.getHouseType())
+                .setDriverLicense(request.getDriverLicense())
+                .setMachineLicense1(request.getMachineLicense1())
+                .setMachineLicense2(request.getMachineLicense2())
+        ;
+
+        return result;
     }
 }

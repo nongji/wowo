@@ -15,6 +15,7 @@ import java.util.Date;
 public class Asset implements Serializable {
 
     Long id;
+    String basePath; // 文件基础路径
     String path;
     Date createTime;
 
@@ -42,6 +43,15 @@ public class Asset implements Serializable {
 
     public Asset setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
+    }
+
+    public String getBasePath() {
+        return basePath;
+    }
+
+    public Asset setBasePath(String basePath) {
+        this.basePath = basePath;
         return this;
     }
 

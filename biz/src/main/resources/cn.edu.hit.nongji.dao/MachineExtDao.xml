@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.hit.nongji.dao.MachineExtDao">
+    <insert id="addNewMachineExt" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.edu.hit.nongji.po.MachineExt">
+        INSERT INTO wowo.machine_ext
+        (machine_id, detail)
+         VALUE
+        (#{machineId}, #{detail})
+    </insert>
+
+    <select id="getMachineExtByMachineId" resultType="cn.edu.hit.nongji.po.MachineExt">
+        SELECT * from wowo.machine_ext
+        WHERE
+        machine_id = #{param1}
+    </select>
+    <delete id="deleteMachineExtByMachineId">
+        DELETE FROM wowo.machine_ext
+        WHERE
+        machine_id = #{param1}
+    </delete>
+
+    <delete id="deleteMachineExtByMachineIds">
+        DELETE FROM wowo.machine_ext
+        WHERE
+        machine_id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
+

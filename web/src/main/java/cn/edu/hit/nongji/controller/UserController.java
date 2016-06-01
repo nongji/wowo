@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.controller;
 
+import cn.edu.hit.nongji.dto.LoginUser;
 import cn.edu.hit.nongji.dto.request.AddUserRequest;
 import cn.edu.hit.nongji.dto.request.UpdateUserRequest;
 import cn.edu.hit.nongji.dto.response.LoginResultDto;
@@ -7,7 +8,10 @@ import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.dto.user.UserDetail;
 import cn.edu.hit.nongji.po.User;
 import cn.edu.hit.nongji.service.UserService;
+import cn.edu.hit.nongji.util.ThreadLocalHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,9 +36,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController extends AbstractCommonController {
 
+
     @Autowired
     @Qualifier("userService")
     private UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /**
      * JSON接口, 添加新用户
@@ -79,9 +86,13 @@ public class UserController extends AbstractCommonController {
         User user = userService.getUserByUserNameAndPassword(username, password);
         if (user != null) {
             // set session infomation here.
-            session.setAttribute("user_id", user.getId());
-            session.setAttribute("username", user.getName());
-            session.setAttribute("mobile", user.getMobile());
+            LoginUser loginUser = new LoginUser().setUserId(user.getId())
+                    .setUserType(user.getUserType())
+                    .setUsername(user.getName());
+
+            session.setAttribute("user", loginUser);
+
+            ThreadLocalHelper.setLoginUser(loginUser);
             return successResponse("login successful.")
                     .setData(new LoginResultDto()
                             .setToken(session.getId())

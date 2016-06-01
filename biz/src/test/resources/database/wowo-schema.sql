@@ -45,32 +45,33 @@ CREATE TABLE wowo.machine_owner (
 -- 农机基本信息表
 
 CREATE TABLE wowo.machine (
-  id INT(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  user_id int(11) NOT NULL DEFAULT 0 COMMENT '所属人用户id',
-  drive_type tinyint(3) NOT NULL DEFAULT 0 COMMENT '驱动类型',
+  id               INT(11)      NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  user_id          INT(11)      NOT NULL DEFAULT 0 COMMENT '所属人用户id',
+  drive_type       TINYINT (3) NOT NULL DEFAULT 0 COMMENT '驱动类型',
 
-  driver_name varchar(255) NOT NULL DEFAULT '' COMMENT '司机姓名',
-  driver_age tinyint(3) NOT NULL COMMENT '司机年龄',
-  driver_gender tinyint(1) NOT NULL COMMENT '性别',
+  driver_name      VARCHAR(255) NOT NULL DEFAULT ''COMMENT '司机姓名',
+  driver_age       TINYINT (3) NOT NULL COMMENT '司机年龄',
+  driver_gender    TINYINT (1) NOT NULL COMMENT '性别',
 
-  license_type tinyint(3) NOT NULL COMMENT '',
-  machine_type int(11) NOT NULL COMMENT '机器类型',
-  machine_name varchar(255) NOT NULL DEFAULT '' COMMENT '机器名称',
-  machine_power tinyint(4) NOT NULL COMMENT '机器马力',
-  passenger_num tinyint(3) NOT NULL COMMENT '可载客数量',
-  wheel_distance double NOT NULL COMMENT '轮距',
-  check_time timestamp NOT NULL COMMENT '',
-  pay_type tinyint(3) NOT NULL COMMENT '支付方式',
-  lease_month int(5) COMMENT '租赁月数',
-  lease_time double COMMENT '租赁时间',
-  work_condition tinyint(3) NOT NULL COMMENT '',
-  need_type tinyint(3) NOT NULL COMMENT '',
-  with_item tinyint(3) NOT NULL COMMENT '',
-  house_type tinyint(3) NOT NULL COMMENT '',
+  license_type     TINYINT (3) NOT NULL COMMENT '驾照类型',
+  machine_type     INT(11)      NOT NULL COMMENT '机器类型',
+  machine_name     VARCHAR(255) NOT NULL DEFAULT ''COMMENT '机器名称',
+  machine_power    TINYINT (4) NOT NULL COMMENT '机器马力',
+  passenger_num    TINYINT (3) NOT NULL COMMENT '可载客数量',
+  wheel_distance   DOUBLE       NOT NULL COMMENT '轮距',
+  check_time       TIMESTAMP    NOT NULL COMMENT '',
+  pay_type         TINYINT (3) NOT NULL COMMENT '支付方式',
+  lease_month      INT(5) COMMENT '租赁月份',
+  lease_time       DOUBLE COMMENT '租赁时间',
+  work_condition   TINYINT (3) NOT NULL COMMENT '工作环境',
+  need_type        TINYINT (3) NOT NULL COMMENT '是否自备',
+  with_item        TINYINT (3) NOT NULL COMMENT '',
+  house_type       TINYINT (3) NOT NULL COMMENT '农机库',
 
-  driver_license int(11) NOT NULL DEFAULT 0 COMMENT '驾照信息',
-  machine_license1 int(11) NOT NULL DEFAULT 0 COMMENT '',
-  machine_license2 int(11) NOT NULL DEFAULT 0 COMMENT '',
+  driver_license   INT(11)      NOT NULL DEFAULT 0 COMMENT '驾照信息',
+  machine_license1 INT(11)      NOT NULL DEFAULT 0 COMMENT '',
+  machine_license2 INT(11)      NOT NULL DEFAULT 0 COMMENT '',
+
 
   PRIMARY KEY (id)
 )/* ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='农机基本信息' */;
@@ -137,6 +138,7 @@ CREATE TABLE wowo.comment (
 
 CREATE TABLE wowo.user_operation_log (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  user_id int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
   type int(4) NOT NULL DEFAULT 0 COMMENT '用户操作类型',
   finished_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作发生时间',
   ip_address varchar(127) NOT NULL DEFAULT '' COMMENT '请求发起者ip地址',
@@ -146,12 +148,23 @@ CREATE TABLE wowo.user_operation_log (
 -- 资源文件
 
 CREATE TABLE wowo.assets (
-  id int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  id          INT(11)      NOT NULL AUTO_INCREMENT COMMENT '自增主键',
 
-  path varchar(255) NOT NULL DEFAULT '' COMMENT '文件路径',
+  base_path   VARCHAR(255) NOT NULL DEFAULT '' COMMENT '文件基础路径',
+  path        VARCHAR(255) NOT NULL DEFAULT '' COMMENT '文件路径',
 
-  create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '文件创建时间',
+  create_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '文件创建时间',
 
   PRIMARY KEY (id)
 )/* ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件记录表' */;
 
+-- 报价信息
+
+CREATE TABLE wowo.quotation (
+  id          INT(11)      NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+
+
+  create_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '文件创建时间',
+
+  PRIMARY KEY (id)
+)/* ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='报价信息表' */;

@@ -4,11 +4,11 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author fangwentong
- * @title AuditHistoryDao
- * @desc 审核记录数据访问对象
- * @since 2016-05-30 23:16
+ * @title QuotationDao
+ * @desc 报价数据访问对象接口
+ * @since 2016-06-01 12:17
  */
 
 @Repository
-public interface AuditHistoryDao {
+public interface QuotationDao {
 }

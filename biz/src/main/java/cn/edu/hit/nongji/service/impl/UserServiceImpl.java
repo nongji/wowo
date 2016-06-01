@@ -11,6 +11,8 @@ import cn.edu.hit.nongji.service.UserService;
 import cn.edu.hit.nongji.util.PasswordUtil;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User getUserByUserNameAndPassword(String username, String password) {

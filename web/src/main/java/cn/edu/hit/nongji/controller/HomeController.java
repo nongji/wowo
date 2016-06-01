@@ -2,6 +2,8 @@ package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.response.Response;
 import com.google.common.base.MoreObjects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController extends AbstractCommonController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @RequestMapping(value = {"/"})
     public String index(@RequestParam(required = false) String name, HttpServletRequest req) {
         return "sign/home";

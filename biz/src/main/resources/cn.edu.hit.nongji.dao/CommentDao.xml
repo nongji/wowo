@@ -3,5 +3,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.hit.nongji.dao.CommentDao">
+    <insert id="addNewComment" parameterType="cn.edu.hit.nongji.po.Comment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO wowo.comment
+        (publish_time, type, related_id, parent_id, user_id, commentted_user_id, content)
+        VALUE
+        (#{publishTime}, #{type}, #{relatedId}, #{parentId}, #{userId}, {commenttedUserId}, #{content})
+    </insert>
+
+    <select id="getCommentByTypeAndRelatedId" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE type = #{param1} and related_id = #{param2}
+    </select>
+
+    <select id="getCommentByParentId" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE parent_id = #{param1}
+    </select>
+
+    <select id="getCommentByParentIds" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE parent_id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getCommentByCommentedUserId" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE commentted_user_id = #{param1}
+    </select>
+
+    <delete id="deleteCommentsByTypeAndRelatedId">
+        DELETE FROM wowo.comment
+        WHERE
+         type = #{param1} AND
+         related_id = #{param2}
+    </delete>
+
+    <select id="deleteCommentsByUserId">
+        DELETE FROM wowo.comment
+        WHERE
+        user_id = #{param1}
+    </select>
 
 </mapper>

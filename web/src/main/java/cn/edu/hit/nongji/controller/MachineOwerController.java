@@ -8,6 +8,8 @@ import cn.edu.hit.nongji.service.MachineOwnerService;
 import cn.edu.hit.nongji.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,8 @@ public class MachineOwerController extends AbstractCommonController {
     private FileSaveService fileSaveService;
     @Autowired
     private AssetManagementService assetManagementService;
+
+    private static final Logger logger = LoggerFactory.getLogger(MachineOwerController.class);
 
     @RequestMapping(value = "/profile", method = {RequestMethod.POST})
     @ResponseBody

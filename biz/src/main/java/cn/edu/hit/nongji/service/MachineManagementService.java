@@ -20,7 +20,7 @@ public interface MachineManagementService {
      *
      * @param registerRequest 注册请求对象
      */
-    void addNewMachine(MachineRegisterRequest registerRequest);
+    long addNewMachine(MachineRegisterRequest registerRequest);
 
     /**
      * 获取指定用户所有注册机器的信息
@@ -45,6 +45,13 @@ public interface MachineManagementService {
      */
     void deleteMachineByMachineId(Long machineId);
 
+    /**
+     * 删除指定用户的所有机器信息
+     *
+     * @param userId 用户id
+     * @return 删除的机器数量
+     */
+    int deleteMachineByUserId(Long userId);
 
     /**
      * 判断指定农机是否属于指定用户

@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.service;
 
+import cn.edu.hit.nongji.dto.file.FilePath;
 import cn.edu.hit.nongji.service.impl.QiNiuFileSaveServiceImpl;
 import com.qiniu.common.QiniuException;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -26,7 +28,10 @@ public class QiNiuFileSaveServiceTest extends ServiceTestBase {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             File file = new File("src/test/java/cn/edu/hit/nongji/service/ServiceTestBase.java");
-            qiNiuFileSaveService.save(file, "ServiceTestBase.java");
+            FilePath filePath = qiNiuFileSaveService.save(file, "ServiceTestBase.java");
+            assertNotNull(filePath);
+            assertNotNull(filePath.getRelativePath());
+            assertNotNull(filePath.getRootPath());
         } catch (QiniuException e) {
             logger.error(e.response.toString());
         }

@@ -4,31 +4,31 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.UserDao">
 
-    <select id="getUserById" resultType="User">
+    <select id="getUserById" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where id = #{id}
     </select>
 
-    <select id="getUserByName" resultType="User">
+    <select id="getUserByName" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where name = #{name}
     </select>
 
-    <select id="getUserByMobile" resultType="User">
+    <select id="getUserByMobile" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where mobile = #{mobile}
     </select>
 
-    <select id="getUserByEmail" resultType="User">
+    <select id="getUserByEmail" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where email = #{email}
     </select>
 
-    <select id="getUserByUserNameAndPassword" resultType="User">
+    <select id="getUserByUserNameAndPassword" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where
@@ -36,7 +36,7 @@
         login_password = #{param2}
     </select>
 
-    <select id="getUserByKeyUniqueValue" resultType="User">
+    <select id="getUserByKeyUniqueValue" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         where
@@ -45,7 +45,7 @@
         email = #{param1}
     </select>
 
-    <select id="getUserByNameOrMobileOrEmail" resultType="User">
+    <select id="getUserByNameOrMobileOrEmail" resultType="cn.edu.hit.nongji.po.User">
         select *
         from wowo.user
         <where>
@@ -62,7 +62,7 @@
         </where>
     </select>
 
-    <insert id="addUser" parameterType="User">
+    <insert id="addUser" useGeneratedKeys="true" keyColumn="id" parameterType="cn.edu.hit.nongji.po.User">
         insert into wowo.user
         (name, mobile, email, login_password, status, domain)
         VALUES
@@ -74,7 +74,7 @@
         where NAME = #{param1} limit 1;
     </delete>
 
-    <update id="updateUser" parameterType="User">
+    <update id="updateUser" parameterType="cn.edu.hit.nongji.po.User">
         update wowo.user
         <set>
             <if test="mobile != null">

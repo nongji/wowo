@@ -4,4 +4,23 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.AssetManagmentDao">
 
+    <insert id="addNewAsset" useGeneratedKeys="true" keyProperty="id" parameterType="cn.edu.hit.nongji.po.Asset">
+        insert into wowo.assets
+        (base_path, path)
+        VALUES
+        (#{basePath}, #{path})
+    </insert>
+
+    <select id="getAssetByAssetId" resultType="cn.edu.hit.nongji.po.Asset">
+        SELECT * FROM wowo.assets
+        WHERE
+        id = #{param1};
+    </select>
+
+    <delete id="deleteAssetByAssetId">
+        DELETE FROM wowo.assets
+        WHERE
+        id = #{param1} limit 1;
+    </delete>
+
 </mapper>

@@ -1,11 +1,21 @@
 package cn.edu.hit.nongji.service.impl;
 
+import cn.edu.hit.nongji.dao.MachineExtDao;
+import cn.edu.hit.nongji.dao.MachineManagementDao;
 import cn.edu.hit.nongji.dto.MachineDetail;
 import cn.edu.hit.nongji.dto.MachineDto;
 import cn.edu.hit.nongji.dto.request.MachineRegisterRequest;
+import cn.edu.hit.nongji.po.Machine;
+import cn.edu.hit.nongji.po.MachineExt;
 import cn.edu.hit.nongji.service.MachineManagementService;
+import com.google.common.collect.Lists;
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,14 +27,24 @@ import java.util.List;
 
 @Service
 public class MachineManagementServiceImpl implements MachineManagementService {
+
+    @Autowired
+    private MachineManagementDao machineManagementDao;
+    @Autowired
+    private MachineExtDao machineExtDao;
+
+    private static final Logger logger = LoggerFactory.getLogger(MachineManagementServiceImpl.class);
+
     /**
      * 添加农机
      *
      * @param registerRequest 注册请求对象
      */
     @Override
-    public void addNewMachine(MachineRegisterRequest registerRequest) {
-
+    public long addNewMachine(MachineRegisterRequest registerRequest) {
+        Machine machine = Machine.fromMachineRegisterRequest(registerRequest);
+        machineManagementDao.addNewMachine(machine);
+        return machine.getId();
     }
 
     /**
@@ -35,7 +55,15 @@ public class MachineManagementServiceImpl implements MachineManagementService {
      */
     @Override
     public List<MachineDto> getRegisteredMachineByUserId(Long userId) {
-        return null;
+        if (userId == null || userId <= 0) {
+            return Collections.emptyList();
+        }
+        List<Machine> machines = machineManagementDao.getRegisteredMachineByUserId(userId);
+        List<MachineDto> result = Lists.newArrayListWithExpectedSize(machines.size());
+        for (Machine machine : machines) {
+            result.add(MachineDto.fromMachine(machine));
+        }
+        return result;
     }
 
     /**
@@ -46,7 +74,13 @@ public class MachineManagementServiceImpl implements MachineManagementService {
      */
     @Override
     public MachineDetail getMachineDetailByMachineId(Long machineId) {
-        return null;
+        if (machineId == null || machineId <= 0) {
+            return null;
+        }
+        Machine machine = machineManagementDao.getMachineDetailByMachineId(machineId);
+        MachineExt machineExt = machineExtDao.getMachineExtByMachineId(machineId);
+        MachineDetail result = MachineDetail.fromMachineAnaMachineExt(machine, machineExt);
+        return result;
     }
 
     /**
@@ -56,7 +90,25 @@ public class MachineManagementServiceImpl implements MachineManagementService {
      */
     @Override
     public void deleteMachineByMachineId(Long machineId) {
+        machineManagementDao.deleteMachineByMachineId(machineId);
+        machineExtDao.deleteMachineExtByMachineId(machineId);
+    }
 
+    /**
+     * 删除指定用户的所有机器信息
+     *
+     * @param userId 用户id
+     * @return 删除的机器数量
+     */
+    @Override
+    public int deleteMachineByUserId(Long userId) {
+        List<Long> machineIds = machineManagementDao.getMachineIdsByUserId(userId);
+        if (CollectionUtils.isEmpty(machineIds)) {
+            return 0;
+        }
+        int affectedRows = machineManagementDao.deleteMachineByUserId(userId);
+        machineExtDao.deleteMachineExtByMachineIds(machineIds);
+        return affectedRows;
     }
 
     /**
@@ -68,6 +120,7 @@ public class MachineManagementServiceImpl implements MachineManagementService {
      */
     @Override
     public boolean isOwnerOfMachine(Long userId, Long machineId) {
-        return false;
+        Machine machine = machineManagementDao.getMachineByMachineIdAndUserId(userId, machineId);
+        return machine != null;
     }
 }

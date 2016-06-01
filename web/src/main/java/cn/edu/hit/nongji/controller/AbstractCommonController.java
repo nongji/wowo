@@ -2,12 +2,14 @@ package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.enums.ResponseStatus;
+import cn.edu.hit.nongji.util.FileUtil;
 import com.google.common.base.MoreObjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * @author fangwentong
@@ -86,7 +88,16 @@ public abstract class AbstractCommonController {
         return responseForResponseStatus(ResponseStatus.INTERNAL_SERVER_ERROR, msg);
     }
 
-    public File convertMultiPartFileToFile(MultipartFile multipartFile) {
-        return null;
+    public File convertMultiPartFileToFile(MultipartFile multipartFile) throws IOException {
+        String filename = FileUtil.getRandomPah(multipartFile.getOriginalFilename());
+        File tmpFile = new File(filename);
+
+        if (tmpFile.exists()) {
+            tmpFile.delete();
+        }
+        tmpFile.createNewFile();
+        multipartFile.transferTo(tmpFile);
+        return tmpFile;
     }
+
 }

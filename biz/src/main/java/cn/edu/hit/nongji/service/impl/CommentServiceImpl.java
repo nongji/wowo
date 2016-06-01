@@ -2,6 +2,8 @@ package cn.edu.hit.nongji.service.impl;
 
 import cn.edu.hit.nongji.po.Comment;
 import cn.edu.hit.nongji.service.CommentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author fangwentong
@@ -11,6 +13,8 @@ import cn.edu.hit.nongji.service.CommentService;
  */
 
 public class CommentServiceImpl implements CommentService {
+    private static final Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
+
     @Override
     public void addNewComment(Comment comment) {
 

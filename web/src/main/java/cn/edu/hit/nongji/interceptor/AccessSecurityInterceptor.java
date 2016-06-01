@@ -1,8 +1,10 @@
 package cn.edu.hit.nongji.interceptor;
 
 import cn.edu.hit.nongji.controller.AbstractCommonController;
+import cn.edu.hit.nongji.dto.LoginUser;
 import cn.edu.hit.nongji.handler.CustomHttpSessionStrategy;
 import cn.edu.hit.nongji.util.AuthTokenUtil;
+import cn.edu.hit.nongji.util.ThreadLocalHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -35,7 +37,13 @@ public class AccessSecurityInterceptor implements HandlerInterceptor {
             logger.debug("Invalid AuthToken: {}.", authToken);
             CustomHttpSessionStrategy.writeResponse(response, AbstractCommonController.invalidTokenResponse());
             return false;
+        } else if (!(session.getAttribute("user") instanceof LoginUser)) {
+            logger.debug("session information is not valid.");
+            CustomHttpSessionStrategy.writeResponse(response,
+                    AbstractCommonController.invalidTokenResponse("用户已注销, 请重新登录"));
+            return false;
         } else {
+            ThreadLocalHelper.setLoginUser((LoginUser) session.getAttribute("user"));
             return true;
         }
     }

@@ -4,6 +4,8 @@ import cn.edu.hit.nongji.dto.PageDto;
 import cn.edu.hit.nongji.dto.user.OperationLogDto;
 import cn.edu.hit.nongji.po.OperationLog;
 import cn.edu.hit.nongji.service.OperationLoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.List;
 
 @Service
 public class OperationLoggerServiceImpl implements OperationLoggerService {
+
+    private static final Logger logger = LoggerFactory.getLogger(OperationLoggerServiceImpl.class);
     /**
      * 添加新的操作记录
      *

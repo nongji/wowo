@@ -4,4 +4,48 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.MachineManagementDao">
 
+    <insert id="addNewMachine" useGeneratedKeys="true" keyColumn="id" parameterType="cn.edu.hit.nongji.po.Machine">
+        insert into wowo.machine
+        (user_id, drive_type, driver_name, driver_age, driver_gender,
+         license_type, machine_type, machine_name, machine_power, passenger_num,
+          wheel_distance, check_time, pay_type, lease_month, lease_time, work_condition,
+           need_type, with_item, house_type, driver_license, machine_license1, machine_license2)
+        VALUES
+        (#{userId}, #{driveType}, #{driverName}, #{driverAge}, #{driverGender},
+         #{licenseType}, #{machineType}, #{machineName}, #{machinePower}, #{passengerNum},
+         #{wheelDistance}, #{checkTime}, #{payType}, #{leaseMonth}, #{leaseTime}, #{workCondition},
+         #{needType}, #{withItem}, #{hourseType}, #{driverLicense}, #{machineLicense1}, #{machineLicense2}
+        )
+    </insert>
+
+    <select id="getRegisteredMachineByUserId" resultType="cn.edu.hit.nongji.po.Machine">
+        SELECT * from wowo.machine
+        WHERE user_id = #{param1}
+    </select>
+
+    <select id="getMachineDetailByMachineId" resultType="cn.edu.hit.nongji.po.Machine">
+        SELECT * FROM wowo.machine
+        WHERE id = #{param1}
+    </select>
+    <select id="getMachineIdsByUserId" resultType="java.lang.Long">
+        SELECT id from wowo.machine
+        WHERE user_id = #{param1}
+    </select>
+
+    <delete id="deleteMachineByMachineId">
+        DELETE FROM wowo.machine
+        WHERE id = #{param1} limit 1
+    </delete>
+
+    <delete id="deleteMachineByUserId">
+        DELETE FROM wowo.machine
+        WHERE user_id = #{param1}
+    </delete>
+
+    <select id="getMachineByMachineIdAndUserId">
+        SELECT * FROM wowo.machine
+        WHERE
+        user_id = #{param1} AND
+        id = #{param2}
+    </select>
 </mapper>

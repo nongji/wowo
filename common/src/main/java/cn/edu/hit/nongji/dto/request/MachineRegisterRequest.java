@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -17,9 +18,14 @@ public class MachineRegisterRequest extends AbstractRequest {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    Integer userType; // 用户类型
-    Integer driveTyep; // 驱动类型
+    Long userId;
 
+    @JsonProperty("user_type")
+    Integer userType; // 用户类型
+    @JsonProperty("drive_type")
+    Integer driveType; // 驱动类型
+
+    @JsonProperty("driver_name")
     String driverName; // 司机姓名
     Integer driverAge;  // 司机年龄
     Integer driverGender; // 司机性别
@@ -64,6 +70,15 @@ public class MachineRegisterRequest extends AbstractRequest {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public MachineRegisterRequest setUserId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
     public Integer getUserType() {
         return userType;
     }
@@ -73,12 +88,12 @@ public class MachineRegisterRequest extends AbstractRequest {
         return this;
     }
 
-    public Integer getDriveTyep() {
-        return driveTyep;
+    public Integer getDriveType() {
+        return driveType;
     }
 
-    public MachineRegisterRequest setDriveTyep(Integer driveTyep) {
-        this.driveTyep = driveTyep;
+    public MachineRegisterRequest setDriveType(Integer driveType) {
+        this.driveType = driveType;
         return this;
     }
 

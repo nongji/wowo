@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class DriverLisenceController extends AbstractCommonController {
+
+    private static final Logger logger = LoggerFactory.getLogger(DriverLisenceController.class);
 }

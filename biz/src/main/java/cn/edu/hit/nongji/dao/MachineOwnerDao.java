@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.dao;
 
+import org.springframework.stereotype.Repository;
+
 /**
  * @author fangwentong
  * @title MachineOwnerDao
@@ -7,5 +9,6 @@ package cn.edu.hit.nongji.dao;
  * @since 2016-05-30 23:07
  */
 
+@Repository
 public interface MachineOwnerDao {
 }
