@@ -27,26 +27,42 @@ public class MachineRegisterRequest extends AbstractRequest {
 
     @JsonProperty("driver_name")
     String driverName; // 司机姓名
+    @JsonProperty("driver_age")
     Integer driverAge;  // 司机年龄
+    @JsonProperty("driver_gender")
     Integer driverGender; // 司机性别
 
+    @JsonProperty("license_type")
     Integer licenseType; //
+    @JsonProperty("machine_type")
     Integer machineType; //  机器类型
+    @JsonProperty("machine_name")
     String machineName; // 机器名称
+    @JsonProperty("machine_power")
     Integer machinePower; // 机器马力
 
+    @JsonProperty("passenger_num")
     Integer passengerNum; // 最大乘客数量
+    @JsonProperty("wheel_distance")
     Double wheelDistance; // 轮距
+    @JsonProperty("checkTime")
     Date checkTime; // 上次检查时间
 
+    @JsonProperty("pay_type")
     Integer payType; // 支付方式
+    @JsonProperty("lease_month")
     Integer leaseMonth; // 租赁月数
+    @JsonProperty("lease_time")
     Double leaseTime; // 租赁时间
 
+    @JsonProperty("work_condition")
     Integer workCondition; // 工作环境
 
+    @JsonProperty("need_type")
     Integer needType;
+    @JsonProperty("with_item")
     Integer withItem;
+    @JsonProperty("house_type")
     Integer houseType;
 
 

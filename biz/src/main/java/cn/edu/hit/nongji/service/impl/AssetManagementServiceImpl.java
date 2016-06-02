@@ -44,8 +44,9 @@ public class AssetManagementServiceImpl implements AssetManagementService {
     }
 
     @Override
-    public Asset getAssetByAssetId(Long assetId) {
-        return assetManagmentDao.getAssetByAssetId(assetId);
+    public String getAssetByAssetId(Long assetId) {
+        Asset asset = assetManagmentDao.getAssetByAssetId(assetId);
+        return String.format("%s/%s", asset.getBasePath(), asset.getPath());
     }
 
 }

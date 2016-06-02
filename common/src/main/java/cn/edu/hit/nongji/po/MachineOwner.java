@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.po;
 
+import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
+
 import java.io.Serializable;
 
 /**
@@ -110,5 +112,22 @@ public class MachineOwner implements Serializable {
     public MachineOwner setCertificate2(Long certificate2) {
         this.certificate2 = certificate2;
         return this;
+    }
+
+    public static MachineOwner fromCompleteUserInfoRequest(CompleteUserInfoRequest request) {
+        MachineOwner result = new MachineOwner();
+
+        result.setUserId(request.getUserId())
+                .setUserType(request.getUserType())
+                .setLat(request.getLat())
+                .setLng(request.getLng())
+                .setLocation(request.getLocation())
+                .setIdCard1(request.getIdCard1())
+                .setIdCard2(request.getIdCard2())
+                .setCertificate1(request.getCertificate1())
+                .setCertificate2(request.getCertificate2())
+        ;
+
+        return result;
     }
 }

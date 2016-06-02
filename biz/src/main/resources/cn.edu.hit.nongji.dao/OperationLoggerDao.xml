@@ -4,4 +4,34 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.OperationLoggerDao">
 
+    <insert id="addNewOperationLog" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.edu.hit.nongji.po.OperationLog">
+        INSERT INTO wowo.user_operation_log
+        (type, finished_time, ip_address)
+        VALUES
+        (#{type}, #{finishedTime}, #{ipAddress})
+    </insert>
+
+    <select id="getOperationLogByUserId" resultType="cn.edu.hit.nongji.po.OperationLog">
+        select * from wowo.user_operation_log
+        WHERE user_id = #{param1}
+    </select>
+
+    <select id="getOperationLogByUserIdAndOpTypes" resultType="cn.edu.hit.nongji.po.OperationLog">
+        SELECT * from wowo.user_operation_log
+        WHERE
+        user_id = #{param1}
+        and
+        type IN
+        <foreach collection="list" index="index" item="item"
+                 separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteOperationLogByUserId">
+        DELETE FROM wowo.user_operation_log
+        WHERE user_id = #{param1}
+    </delete>
+
 </mapper>

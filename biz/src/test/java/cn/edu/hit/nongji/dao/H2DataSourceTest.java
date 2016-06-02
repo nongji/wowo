@@ -58,7 +58,7 @@ public class H2DataSourceTest extends DaoTestBase {
 
     @Test
     public void testShowCreateTable() {
-        namedParameterJdbcTemplate.update("insert into wowo.user (base_path, path) VALUES ('a', 'b')", Collections.emptyMap());
+        namedParameterJdbcTemplate.update("insert into wowo.assets (base_path, path) VALUES ('a', 'b')", Collections.emptyMap());
         namedParameterJdbcTemplate.query("select * from wowo.assets;", new ResultSetExtractor<Void>() {
             @Override
             public Void extractData(ResultSet rs) throws SQLException, DataAccessException {

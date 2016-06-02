@@ -1,7 +1,6 @@
 package cn.edu.hit.nongji.service;
 
 import cn.edu.hit.nongji.dto.file.FilePath;
-import cn.edu.hit.nongji.po.Asset;
 
 /**
  * @author fangwentong
@@ -35,5 +34,6 @@ public interface AssetManagementService {
      * @param assetId 资源id
      * @return 资源路径信息
      */
-    Asset getAssetByAssetId(Long assetId);
+    String getAssetByAssetId(Long assetId);
+
 }

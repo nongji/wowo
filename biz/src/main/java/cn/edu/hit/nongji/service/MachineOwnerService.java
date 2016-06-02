@@ -1,6 +1,7 @@
 package cn.edu.hit.nongji.service;
 
 import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
+import cn.edu.hit.nongji.po.MachineOwner;
 
 /**
  * @author fangwentong
@@ -12,4 +13,5 @@ import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
 public interface MachineOwnerService {
     Long completeUserInfo(CompleteUserInfoRequest completeUserInfoRequest);
 
+    MachineOwner getMachineOwnerInfo(Long userId);
 }

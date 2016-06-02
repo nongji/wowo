@@ -1,7 +1,6 @@
 package cn.edu.hit.nongji.handler;
 
 
-import cn.edu.hit.nongji.controller.AbstractCommonController;
 import cn.edu.hit.nongji.dto.response.Response;
 import cn.edu.hit.nongji.util.AuthTokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +53,9 @@ public class CustomHttpSessionStrategy implements HttpSessionStrategy {
     }
 
     public String getRequestedSessionId(HttpServletRequest request) {
-        return AuthTokenUtil.getAuthToken(request);
+        String sessionId = AuthTokenUtil.getAuthToken(request);
+        logger.debug("GOT SESSION ID: {}", sessionId);
+        return sessionId;
     }
 
     /**
@@ -91,13 +92,7 @@ public class CustomHttpSessionStrategy implements HttpSessionStrategy {
     }
 
     public void onInvalidateSession(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader(this.headerName, "");
         logger.info("Invalid session: {}", request);
-        try {
-            writeResponse(response, AbstractCommonController.invalidTokenResponse());
-        } catch (IOException e) {
-            logger.error("Error while write response, {}", e);
-        }
     }
 
     public void setHeaderName(String headerName) {

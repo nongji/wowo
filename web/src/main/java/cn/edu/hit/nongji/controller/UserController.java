@@ -36,7 +36,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController extends AbstractCommonController {
 
-
     @Autowired
     @Qualifier("userService")
     private UserService userService;

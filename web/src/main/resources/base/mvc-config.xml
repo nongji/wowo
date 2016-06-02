@@ -32,6 +32,8 @@
             <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
             <mvc:mapping path="/test/*"/>
             <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/machine/*"/>
+            <mvc:mapping path="/comment/*"/>
             <mvc:exclude-mapping path="/test/index"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/signup"/>

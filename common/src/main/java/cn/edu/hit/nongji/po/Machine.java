@@ -17,6 +17,7 @@ public class Machine implements Serializable {
 
     Long id;
     Integer userType; // 用户类型
+    Long userId;
     Integer driveType; // 驱动类型
 
     String driverName; // 司机姓名
@@ -62,6 +63,15 @@ public class Machine implements Serializable {
 
     public Machine setUserType(Integer userType) {
         this.userType = userType;
+        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Machine setUserId(Long userId) {
+        this.userId = userId;
         return this;
     }
 
@@ -262,7 +272,8 @@ public class Machine implements Serializable {
     public static Machine fromMachineRegisterRequest(MachineRegisterRequest request) {
         Machine result = new Machine();
 
-        result.setUserType(request.getUserType())
+        result.setUserId(request.getUserId())
+                .setUserType(request.getUserType())
                 .setDriveType(request.getDriveType())
                 .setDriverName(request.getDriverName())
                 .setDriverAge(request.getDriverAge())

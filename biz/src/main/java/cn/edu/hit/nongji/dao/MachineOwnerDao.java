@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.dao;
 
+import cn.edu.hit.nongji.po.MachineOwner;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MachineOwnerDao {
+    int completeMachineOwnerInfo(MachineOwner machineOwner);
+
+    MachineOwner getMachineOwerByUserId(Long userId);
 }

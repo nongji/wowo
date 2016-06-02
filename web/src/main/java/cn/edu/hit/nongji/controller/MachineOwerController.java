@@ -1,11 +1,14 @@
 package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
+import cn.edu.hit.nongji.dto.response.MachineOwnerInfo;
 import cn.edu.hit.nongji.dto.response.Response;
+import cn.edu.hit.nongji.po.MachineOwner;
 import cn.edu.hit.nongji.service.AssetManagementService;
 import cn.edu.hit.nongji.service.FileSaveService;
 import cn.edu.hit.nongji.service.MachineOwnerService;
 import cn.edu.hit.nongji.util.FileUtil;
+import cn.edu.hit.nongji.util.ThreadLocalHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -45,7 +48,6 @@ public class MachineOwerController extends AbstractCommonController {
 
     @RequestMapping(value = "/profile", method = {RequestMethod.POST})
     @ResponseBody
-
     public Response uploadQulificationInfo(@RequestParam(value = "id_card_1", required = false) MultipartFile idCard1,
                                            @RequestParam(value = "id_card_2", required = false) MultipartFile idCard2,
                                            @RequestParam(value = "certificate_1", required = false) MultipartFile certificate1,
@@ -110,4 +112,24 @@ public class MachineOwerController extends AbstractCommonController {
 
         return successResponse("个人信息补充完成");
     }
+
+    @RequestMapping(value = "/profile", method = {RequestMethod.GET})
+    @ResponseBody
+    public Response getSelfProfile() {
+        long userId = ThreadLocalHelper.getLoginUser().getUserId();
+        MachineOwner owner = machineOwnerService.getMachineOwnerInfo(userId);
+        MachineOwnerInfo result = new MachineOwnerInfo()
+                .setLat(owner.getLat())
+                .setLng(owner.getLng())
+                .setUserId(owner.getUserId())
+                .setUserType(owner.getUserType())
+                .setLocation(owner.getLocation())
+                .setIdCard1(assetManagementService.getAssetByAssetId(owner.getIdCard1()))
+                .setIdCard2(assetManagementService.getAssetByAssetId(owner.getIdCard2()))
+                .setCertificate1(assetManagementService.getAssetByAssetId(owner.getCertificate1()))
+                .setCertificate2(assetManagementService.getAssetByAssetId(owner.getCertificate2()));
+
+        return successResponse().setData(result);
+    }
+
 }

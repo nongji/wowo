@@ -1,6 +1,8 @@
 package cn.edu.hit.nongji.controller;
 
+import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,4 +19,9 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration("classpath:ctx-test-controller.xml")
 public class ControllerTestBase {
     protected Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
 }

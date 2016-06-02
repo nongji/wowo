@@ -14,7 +14,7 @@
         (#{userId}, #{driveType}, #{driverName}, #{driverAge}, #{driverGender},
          #{licenseType}, #{machineType}, #{machineName}, #{machinePower}, #{passengerNum},
          #{wheelDistance}, #{checkTime}, #{payType}, #{leaseMonth}, #{leaseTime}, #{workCondition},
-         #{needType}, #{withItem}, #{hourseType}, #{driverLicense}, #{machineLicense1}, #{machineLicense2}
+        #{needType}, #{withItem}, #{houseType}, #{driverLicense}, #{machineLicense1}, #{machineLicense2}
         )
     </insert>
 

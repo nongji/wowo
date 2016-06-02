@@ -1,5 +1,7 @@
 package cn.edu.hit.nongji.controller;
 
+import org.junit.Test;
+
 /**
  * @author fangwentong
  * @title AbstractCommonControllerTest
@@ -7,5 +9,8 @@ package cn.edu.hit.nongji.controller;
  */
 
 public class AbstractCommonControllerTest extends ControllerTestBase {
+    @Test
+    public void test() {
 
+    }
 }

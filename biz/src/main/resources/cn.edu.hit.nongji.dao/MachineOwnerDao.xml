@@ -4,34 +4,17 @@
 
 <mapper namespace="cn.edu.hit.nongji.dao.MachineOwnerDao">
 
-    <insert id="addNewOperationLog" keyProperty="id" useGeneratedKeys="true"
-            parameterType="cn.edu.hit.nongji.po.OperationLog">
-        INSERT INTO wowo.user_operation_log
-        (type, finished_time, ip_address)
+    <insert id="completeMachineOwnerInfo" parameterType="cn.edu.hit.nongji.po.MachineOwner"
+            useGeneratedKeys="true" keyColumn="id">
+        INSERT into wowo.machine_owner
+        (user_id, user_type, location, lng, lat, id_card_1, id_card_2, certificate_1, certificate_2)
         VALUES
-        (#{type}, #{finishedTime}, #{ipAddress})
+        (#{userId}, #{userType}, #{location}, #{lng}, #{lag}, #{idCard1}, #{idCard2}, #{certificate1}, #{certificate2})
     </insert>
 
-    <select id="getOperationLogByUserId" resultType="cn.edu.hit.nongji.po.OperationLog">
-        select * from wowo.user_operation_log
+    <select id="getMachineOwerByUserId" resultType="cn.edu.hit.nongji.po.MachineOwner">
+        SELECT * FROM wowo.machine_owner
         WHERE user_id = #{param1}
     </select>
-
-    <select id="getOperationLogByUserIdAndOpTypes" resultType="cn.edu.hit.nongji.po.OperationLog">
-        SELECT * from wowo.user_operation_log
-        WHERE
-        user_id = #{param1}
-        and
-        type IN
-        <foreach collection="list" index="index" item="item"
-                 separator="," open="(" close=")">
-            #{item}
-        </foreach>
-    </select>
-
-    <delete id="deleteOperationLogByUserId">
-        DELETE FROM wowo.user_operation_log
-        WHERE user_id = #{param1}
-    </delete>
 
 </mapper>

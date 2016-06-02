@@ -1,12 +1,14 @@
 package cn.edu.hit.nongji.dto;
 
+import java.io.Serializable;
+
 /**
  * @author fangwentong
  * @title LoginUser
  * @date 2016-05-27 20:05
  */
 
-public class LoginUser {
+public class LoginUser implements Serializable {
     String username;
     Long userId;
     Integer userType;
