@@ -1,6 +1,7 @@
 package cn.edu.hit.nongji.controller;
 
 import cn.edu.hit.nongji.dto.LoginUser;
+import cn.edu.hit.nongji.dto.MachineDetail;
 import cn.edu.hit.nongji.dto.MachineDto;
 import cn.edu.hit.nongji.dto.request.MachineRegisterRequest;
 import cn.edu.hit.nongji.dto.response.Response;
@@ -9,6 +10,7 @@ import cn.edu.hit.nongji.service.FileSaveService;
 import cn.edu.hit.nongji.service.MachineManagementService;
 import cn.edu.hit.nongji.util.FileUtil;
 import cn.edu.hit.nongji.util.ThreadLocalHelper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -49,8 +51,8 @@ public class MachineController extends AbstractCommonController {
     @RequestMapping(value = "/new", method = {RequestMethod.POST})
     @ResponseBody
     public Response addNewMachine(@RequestParam(value = "driver_license", required = false) MultipartFile driverLicense,
-                                  @RequestParam(value = "machine_license1", required = false) MultipartFile machineLicense1,
-                                  @RequestParam(value = "machine_license2", required = false) MultipartFile machineLicense2,
+                                  @RequestParam(value = "machine_license_1", required = false) MultipartFile machineLicense1,
+                                  @RequestParam(value = "machine_license_2", required = false) MultipartFile machineLicense2,
                                   @RequestParam(value = "data", required = false) String data
     ) {
         if (driverLicense == null) {
@@ -65,10 +67,11 @@ public class MachineController extends AbstractCommonController {
         MachineRegisterRequest registerRequest = null;
         try {
             registerRequest = MachineRegisterRequest.fromJsonString(data);
-        } catch (UnrecognizedPropertyException e) {
+        } catch (UnrecognizedPropertyException | InvalidFormatException e) {
             return inputErrorResponse(e.getMessage());
         } catch (IOException e) {
-            return inputErrorResponse("data域不是合法的JSON字符串.");
+            return inputErrorResponse("data域不是合法的JSON字符串.")
+                    .setData(data);
         }
 
         LoginUser user = ThreadLocalHelper.getLoginUser();
@@ -110,7 +113,7 @@ public class MachineController extends AbstractCommonController {
         return successResponse("添加成功");
     }
 
-    @RequestMapping("list/my")
+    @RequestMapping("/list/my")
     @ResponseBody
     public Response getMyMachines() {
         LoginUser user = ThreadLocalHelper.getLoginUser();
@@ -118,11 +121,17 @@ public class MachineController extends AbstractCommonController {
         return successResponse().setData(result);
     }
 
-    @RequestMapping("list/{userId}")
+    @RequestMapping("/list/{userId}")
     @ResponseBody
     public Response getMachinesByUserId(@PathVariable long userId) {
         List<MachineDto> result = machineManagementService.getRegisteredMachineByUserId(userId);
         return successResponse().setData(result);
     }
-    
+
+    @RequestMapping("/{machineId}/detail")
+    @ResponseBody
+    public Response getMachineDetailByMachineId(@PathVariable long machineId) {
+        MachineDetail detail = machineManagementService.getMachineDetailByMachineId(machineId);
+        return successResponse().setData(detail);
+    }
 }

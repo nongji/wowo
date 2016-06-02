@@ -24,9 +24,10 @@ public class Machine implements Serializable {
     Integer driverAge;  // 司机年龄
     Integer driverGender; // 司机性别
 
-    Integer licenseType; //
-    Integer machineType; //  机器类型
+    String licenseType; //
+    String machineType; //  机器类型
     String machineName; // 机器名称
+    Integer machinePowerType;
     Integer machinePower; // 机器马力
 
     Integer passengerNum; // 最大乘客数量
@@ -37,7 +38,7 @@ public class Machine implements Serializable {
     Integer leaseMonth; // 租赁月数
     Double leaseTime; // 租赁时间
 
-    Integer workCondition; // 工作环境
+    String workCondition; // 工作环境
 
     Integer needType;
     Integer withItem;
@@ -111,20 +112,20 @@ public class Machine implements Serializable {
         return this;
     }
 
-    public Integer getLicenseType() {
+    public String getLicenseType() {
         return licenseType;
     }
 
-    public Machine setLicenseType(Integer licenseType) {
+    public Machine setLicenseType(String licenseType) {
         this.licenseType = licenseType;
         return this;
     }
 
-    public Integer getMachineType() {
+    public String getMachineType() {
         return machineType;
     }
 
-    public Machine setMachineType(Integer machineType) {
+    public Machine setMachineType(String machineType) {
         this.machineType = machineType;
         return this;
     }
@@ -135,6 +136,15 @@ public class Machine implements Serializable {
 
     public Machine setMachineName(String machineName) {
         this.machineName = machineName;
+        return this;
+    }
+
+    public Integer getMachinePowerType() {
+        return machinePowerType;
+    }
+
+    public Machine setMachinePowerType(Integer machinePowerType) {
+        this.machinePowerType = machinePowerType;
         return this;
     }
 
@@ -201,11 +211,11 @@ public class Machine implements Serializable {
         return this;
     }
 
-    public Integer getWorkCondition() {
+    public String getWorkCondition() {
         return workCondition;
     }
 
-    public Machine setWorkCondition(Integer workCondition) {
+    public Machine setWorkCondition(String workCondition) {
         this.workCondition = workCondition;
         return this;
     }
@@ -281,6 +291,7 @@ public class Machine implements Serializable {
                 .setLicenseType(request.getLicenseType())
                 .setMachineType(request.getMachineType())
                 .setMachineName(request.getMachineName())
+                .setMachinePowerType(request.getMachinePowerType())
                 .setMachinePower(request.getMachinePower())
                 .setPassengerNum(request.getPassengerNum())
                 .setWheelDistance(request.getWheelDistance())

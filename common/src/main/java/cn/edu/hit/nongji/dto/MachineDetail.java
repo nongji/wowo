@@ -93,9 +93,6 @@ public class MachineDetail extends MachineDto {
                     .setNeedType(machine.getNeedType())
                     .setWithItem(machine.getWithItem())
                     .setHouseType(machine.getHouseType())
-                    .setDriverLicense(machine.getDriverLicense())
-                    .setMachineLicense1(machine.getMachineLicense1())
-                    .setMachineLicense2(machine.getMachineLicense2())
             ;
         }
         if (machineExt != null) {

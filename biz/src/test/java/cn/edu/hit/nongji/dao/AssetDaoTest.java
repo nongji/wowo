@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author fangwentong
  * @title AssetDaoTest
- * @desc TODO
+ * @desc unit test for {@link AssetManagmentDao }
  * @since 2016-06-01 14:23
  */
 
@@ -39,11 +39,20 @@ public class AssetDaoTest extends DaoTestBase {
 
     @Test
     public void testDeleteAsset() {
+        Asset asset1 = new Asset().setPath("sdsfdksafdsa.img").setBasePath("http://hi.com");
+        assetManagmentDao.addNewAsset(asset1);
+        Long assetId = asset1.getId();
 
-    }
+        assertNotNull(assetId);
+        Asset assertSelected = assetManagmentDao.getAssetByAssetId(assetId);
+        assertNotNull(assertSelected);
+        assertNotNull(assertSelected.getBasePath());
+        assertNotNull(assertSelected.getPath());
 
-    @Test
-    public void testSelectAsset() {
+        System.out.println(assertSelected);
+
+        assertTrue(assetManagmentDao.deleteAssetByAssetId(assetId) > 0);
+        assertNull(assetManagmentDao.getAssetByAssetId(assetId));
 
     }
 }

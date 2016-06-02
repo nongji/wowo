@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.dao;
 
+import cn.edu.hit.nongji.po.Quotation;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +12,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QuotationDao {
+    int addNewQuotation(Quotation quotation);
+
+    Quotation getQuotationByQuotation(long quotationId);
+
 }

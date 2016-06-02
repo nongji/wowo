@@ -7,6 +7,7 @@ import cn.edu.hit.nongji.dto.MachineDto;
 import cn.edu.hit.nongji.dto.request.MachineRegisterRequest;
 import cn.edu.hit.nongji.po.Machine;
 import cn.edu.hit.nongji.po.MachineExt;
+import cn.edu.hit.nongji.service.AssetManagementService;
 import cn.edu.hit.nongji.service.MachineManagementService;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
@@ -32,6 +33,9 @@ public class MachineManagementServiceImpl implements MachineManagementService {
     private MachineManagementDao machineManagementDao;
     @Autowired
     private MachineExtDao machineExtDao;
+
+    @Autowired
+    private AssetManagementService assetManagementService;
 
     private static final Logger logger = LoggerFactory.getLogger(MachineManagementServiceImpl.class);
 
@@ -80,6 +84,9 @@ public class MachineManagementServiceImpl implements MachineManagementService {
         Machine machine = machineManagementDao.getMachineDetailByMachineId(machineId);
         MachineExt machineExt = machineExtDao.getMachineExtByMachineId(machineId);
         MachineDetail result = MachineDetail.fromMachineAnaMachineExt(machine, machineExt);
+        result.setDriverLicense(assetManagementService.getAssetByAssetId(machine.getDriverLicense()))
+                .setMachineLicense1(assetManagementService.getAssetByAssetId(machine.getMachineLicense1()))
+                .setMachineLicense2(assetManagementService.getAssetByAssetId(machine.getMachineLicense2()));
         return result;
     }
 

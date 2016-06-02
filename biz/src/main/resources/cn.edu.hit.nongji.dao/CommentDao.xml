@@ -47,4 +47,10 @@
         user_id = #{param1}
     </select>
 
+    <select id="deleteCommentsByCommentId">
+        DELETE FROM wowo.comment
+        WHERE
+        id = #{param1}
+    </select>
+
 </mapper>

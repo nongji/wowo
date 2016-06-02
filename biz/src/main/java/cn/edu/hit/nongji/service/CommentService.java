@@ -11,15 +11,37 @@ import cn.edu.hit.nongji.po.Comment;
 
 public interface CommentService {
 
-    void addNewComment(Comment comment);
+    /**
+     * 添加新的评论
+     *
+     * @param comment
+     */
+    Long addNewComment(Comment comment);
 
+    /**
+     * 根据评论内容获取
+     *
+     * @param commentId
+     */
     void deleteComment(Long commentId);
 
+    /**
+     * 隐藏评论
+     *
+     * @param commentId
+     */
     void hideComment(Long commentId);
 
+    /**
+     * 删除指定用户所有的评论
+     *
+     * @param userId
+     */
     void deleteCommentsByUserId(Long userId);
 
-    void deleteCommentsByCommenttedUserId(Long commenttedUserId);
 
+    /**
+     * @param demandId
+     */
     void deleteCommentsByDemandId(Long demandId);
 }

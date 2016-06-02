@@ -32,23 +32,25 @@ public class MachineRegisterRequest extends AbstractRequest {
     @JsonProperty("driver_gender")
     Integer driverGender; // 司机性别
 
-    @JsonProperty("license_type")
-    Integer licenseType; //
+    @JsonProperty("driver_license_type")
+    String licenseType; //
     @JsonProperty("machine_type")
-    Integer machineType; //  机器类型
+    String machineType; //  机器类型
     @JsonProperty("machine_name")
     String machineName; // 机器名称
+    @JsonProperty("machine_powertype")
+    Integer machinePowerType;
     @JsonProperty("machine_power")
     Integer machinePower; // 机器马力
 
     @JsonProperty("passenger_num")
     Integer passengerNum; // 最大乘客数量
-    @JsonProperty("wheel_distance")
+    @JsonProperty("machine_wheeldistance")
     Double wheelDistance; // 轮距
-    @JsonProperty("checkTime")
+    @JsonProperty("machine_checktime")
     Date checkTime; // 上次检查时间
 
-    @JsonProperty("pay_type")
+    @JsonProperty("machine_paytype")
     Integer payType; // 支付方式
     @JsonProperty("lease_month")
     Integer leaseMonth; // 租赁月数
@@ -56,7 +58,7 @@ public class MachineRegisterRequest extends AbstractRequest {
     Double leaseTime; // 租赁时间
 
     @JsonProperty("work_condition")
-    Integer workCondition; // 工作环境
+    String workCondition; // 工作环境
 
     @JsonProperty("need_type")
     Integer needType;
@@ -64,7 +66,6 @@ public class MachineRegisterRequest extends AbstractRequest {
     Integer withItem;
     @JsonProperty("house_type")
     Integer houseType;
-
 
     Long driverLicense;
     Long machineLicense1;
@@ -140,20 +141,20 @@ public class MachineRegisterRequest extends AbstractRequest {
         return this;
     }
 
-    public Integer getLicenseType() {
+    public String getLicenseType() {
         return licenseType;
     }
 
-    public MachineRegisterRequest setLicenseType(Integer licenseType) {
+    public MachineRegisterRequest setLicenseType(String licenseType) {
         this.licenseType = licenseType;
         return this;
     }
 
-    public Integer getMachineType() {
+    public String getMachineType() {
         return machineType;
     }
 
-    public MachineRegisterRequest setMachineType(Integer machineType) {
+    public MachineRegisterRequest setMachineType(String machineType) {
         this.machineType = machineType;
         return this;
     }
@@ -164,6 +165,15 @@ public class MachineRegisterRequest extends AbstractRequest {
 
     public MachineRegisterRequest setMachineName(String machineName) {
         this.machineName = machineName;
+        return this;
+    }
+
+    public Integer getMachinePowerType() {
+        return machinePowerType;
+    }
+
+    public MachineRegisterRequest setMachinePowerType(Integer machinePowerType) {
+        this.machinePowerType = machinePowerType;
         return this;
     }
 
@@ -230,11 +240,11 @@ public class MachineRegisterRequest extends AbstractRequest {
         return this;
     }
 
-    public Integer getWorkCondition() {
+    public String getWorkCondition() {
         return workCondition;
     }
 
-    public MachineRegisterRequest setWorkCondition(Integer workCondition) {
+    public MachineRegisterRequest setWorkCondition(String workCondition) {
         this.workCondition = workCondition;
         return this;
     }

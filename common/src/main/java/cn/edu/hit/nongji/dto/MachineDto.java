@@ -22,9 +22,11 @@ public class MachineDto implements Serializable {
     Integer driverAge;  // 司机年龄
     Integer driverGender; // 司机性别
 
-    Integer licenseType; //
-    Integer machineType; //  机器类型
+    String licenseType; //
+    String machineType; //  机器类型
     String machineName; // 机器名称
+
+    Integer machinePowerType; // 动力类型
     Integer machinePower; // 机器马力
 
     Integer passengerNum; // 最大乘客数量
@@ -35,16 +37,16 @@ public class MachineDto implements Serializable {
     Integer leaseMonth; // 租赁月数
     Double leaseTime; // 租赁时间
 
-    Integer workCondition; // 工作环境
+    String workCondition; // 工作环境
 
     Integer needType;
     Integer withItem;
     Integer houseType;
 
 
-    Long driverLicense;
-    Long machineLicense1;
-    Long machineLicense2;
+    String driverLicense;
+    String machineLicense1;
+    String machineLicense2;
 
     public Long getId() {
         return id;
@@ -100,20 +102,20 @@ public class MachineDto implements Serializable {
         return this;
     }
 
-    public Integer getLicenseType() {
+    public String getLicenseType() {
         return licenseType;
     }
 
-    public MachineDto setLicenseType(Integer licenseType) {
+    public MachineDto setLicenseType(String licenseType) {
         this.licenseType = licenseType;
         return this;
     }
 
-    public Integer getMachineType() {
+    public String getMachineType() {
         return machineType;
     }
 
-    public MachineDto setMachineType(Integer machineType) {
+    public MachineDto setMachineType(String machineType) {
         this.machineType = machineType;
         return this;
     }
@@ -124,6 +126,15 @@ public class MachineDto implements Serializable {
 
     public MachineDto setMachineName(String machineName) {
         this.machineName = machineName;
+        return this;
+    }
+
+    public Integer getMachinePowerType() {
+        return machinePowerType;
+    }
+
+    public MachineDto setMachinePowerType(Integer machinePowerType) {
+        this.machinePowerType = machinePowerType;
         return this;
     }
 
@@ -190,11 +201,11 @@ public class MachineDto implements Serializable {
         return this;
     }
 
-    public Integer getWorkCondition() {
+    public String getWorkCondition() {
         return workCondition;
     }
 
-    public MachineDto setWorkCondition(Integer workCondition) {
+    public MachineDto setWorkCondition(String workCondition) {
         this.workCondition = workCondition;
         return this;
     }
@@ -226,29 +237,29 @@ public class MachineDto implements Serializable {
         return this;
     }
 
-    public Long getDriverLicense() {
+    public String getDriverLicense() {
         return driverLicense;
     }
 
-    public MachineDto setDriverLicense(Long driverLicense) {
+    public MachineDto setDriverLicense(String driverLicense) {
         this.driverLicense = driverLicense;
         return this;
     }
 
-    public Long getMachineLicense1() {
+    public String getMachineLicense1() {
         return machineLicense1;
     }
 
-    public MachineDto setMachineLicense1(Long machineLicense1) {
+    public MachineDto setMachineLicense1(String machineLicense1) {
         this.machineLicense1 = machineLicense1;
         return this;
     }
 
-    public Long getMachineLicense2() {
+    public String getMachineLicense2() {
         return machineLicense2;
     }
 
-    public MachineDto setMachineLicense2(Long machineLicense2) {
+    public MachineDto setMachineLicense2(String machineLicense2) {
         this.machineLicense2 = machineLicense2;
         return this;
     }
@@ -270,6 +281,7 @@ public class MachineDto implements Serializable {
                 .setLicenseType(machine.getLicenseType())
                 .setMachineType(machine.getMachineType())
                 .setMachineName(machine.getMachineName())
+                .setMachinePowerType(machine.getMachinePowerType())
                 .setMachinePower(machine.getMachinePower())
                 .setPassengerNum(machine.getPassengerNum())
                 .setWheelDistance(machine.getWheelDistance())
@@ -281,9 +293,6 @@ public class MachineDto implements Serializable {
                 .setNeedType(machine.getNeedType())
                 .setWithItem(machine.getWithItem())
                 .setHouseType(machine.getHouseType())
-                .setDriverLicense(machine.getDriverLicense())
-                .setMachineLicense1(machine.getMachineLicense1())
-                .setMachineLicense2(machine.getMachineLicense2())
         ;
 
         return result;

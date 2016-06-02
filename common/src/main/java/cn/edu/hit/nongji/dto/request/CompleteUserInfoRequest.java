@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -15,13 +16,19 @@ import java.io.IOException;
 public class CompleteUserInfoRequest extends AbstractRequest {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
+    @JsonProperty("user_id")
     private Long userId; // 用户id
+    @JsonProperty("user_type")
     private Integer userType;  // 商户类型
+    @JsonProperty("id_card_number")
     private String idCardNumber; // 证件号码
+    @JsonProperty("driver_lisence")
     private String driverLisence; // 驾驶证
     private String location; // 地址信息
 
+    @JsonProperty("longitude")
     private Double lng;  // 经度
+    @JsonProperty("latitude")
     private Double lat;  // 纬度
 
     private Long idCard1;

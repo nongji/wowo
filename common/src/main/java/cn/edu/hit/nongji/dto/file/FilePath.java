@@ -36,4 +36,8 @@ public class FilePath implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+    public String getFullPath() {
+        return String.format("%s/%s", rootPath, relativePath);
+    }
 }

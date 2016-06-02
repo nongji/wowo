@@ -1,14 +1,19 @@
 package cn.edu.hit.nongji.controller;
 
+import cn.edu.hit.nongji.dto.LoginUser;
 import cn.edu.hit.nongji.dto.request.CompleteUserInfoRequest;
 import cn.edu.hit.nongji.dto.response.MachineOwnerInfo;
 import cn.edu.hit.nongji.dto.response.Response;
+import cn.edu.hit.nongji.enums.user.UserStatus;
 import cn.edu.hit.nongji.po.MachineOwner;
 import cn.edu.hit.nongji.service.AssetManagementService;
 import cn.edu.hit.nongji.service.FileSaveService;
 import cn.edu.hit.nongji.service.MachineOwnerService;
+import cn.edu.hit.nongji.service.UserService;
 import cn.edu.hit.nongji.util.FileUtil;
 import cn.edu.hit.nongji.util.ThreadLocalHelper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -39,6 +44,9 @@ public class MachineOwerController extends AbstractCommonController {
     private MachineOwnerService machineOwnerService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     @Qualifier("qiNiuFileSaveServiceImpl")
     private FileSaveService fileSaveService;
     @Autowired
@@ -64,8 +72,12 @@ public class MachineOwerController extends AbstractCommonController {
             return inputErrorResponse("缺少详细信息");
         }
         CompleteUserInfoRequest request = null;
+        LoginUser loginUser = ThreadLocalHelper.getLoginUser();
+
         try {
             request = CompleteUserInfoRequest.fromJsonString(data);
+        } catch (UnrecognizedPropertyException | InvalidFormatException e) {
+            return inputErrorResponse(e.getMessage());
         } catch (IOException e) {
             return inputErrorResponse("data域不是有效的JSON字符串.");
         }
@@ -108,7 +120,10 @@ public class MachineOwerController extends AbstractCommonController {
             return internalServerError("Error while save file.");
         }
 
+        request.setUserId(loginUser.getUserId());
+
         machineOwnerService.completeUserInfo(request);
+        userService.updateUserStatus(loginUser.getUserId(), UserStatus.ACTIVE);
 
         return successResponse("个人信息补充完成");
     }

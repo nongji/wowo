@@ -5,11 +5,11 @@
 <mapper namespace="cn.edu.hit.nongji.dao.MachineOwnerDao">
 
     <insert id="completeMachineOwnerInfo" parameterType="cn.edu.hit.nongji.po.MachineOwner"
-            useGeneratedKeys="true" keyColumn="id">
+            useGeneratedKeys="true" keyProperty="id">
         INSERT into wowo.machine_owner
         (user_id, user_type, location, lng, lat, id_card_1, id_card_2, certificate_1, certificate_2)
         VALUES
-        (#{userId}, #{userType}, #{location}, #{lng}, #{lag}, #{idCard1}, #{idCard2}, #{certificate1}, #{certificate2})
+        (#{userId}, #{userType}, #{location}, #{lng}, #{lat}, #{idCard1}, #{idCard2}, #{certificate1}, #{certificate2})
     </insert>
 
     <select id="getMachineOwerByUserId" resultType="cn.edu.hit.nongji.po.MachineOwner">

@@ -68,9 +68,16 @@ public interface CommentDao {
     /**
      * 删除指定用户发表的所有评论
      *
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     int deleteCommentsByUserId(long userId);
 
+    /**
+     * 删除评论id删除评论
+     *
+     * @param commentId 评论id
+     * @return 影响行数
+     */
+    int deleteCommentsByCommentId(long commentId);
 }

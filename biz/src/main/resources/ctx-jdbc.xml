@@ -39,11 +39,13 @@
         <property name="dataSource" ref="masterDataSource"/>
         <property name="typeAliasesPackage" value="cn.edu.hit.nongji.po"/>
         <property name="mapperLocations" value="classpath:cn.edu.hit.nongji.dao/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.edu.hit.nongji.dao"/>
     </bean>
+
 </beans>
 

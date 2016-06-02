@@ -53,6 +53,5 @@ public class LoggerFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 }
