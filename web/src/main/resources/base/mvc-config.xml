@@ -35,6 +35,7 @@
             <mvc:mapping path="/machine/**"/>
             <mvc:mapping path="/comment/**"/>
             <mvc:mapping path="/asset/**"/>
+            <mvc:mapping path="/quotation/**"/>
             <mvc:exclude-mapping path="/test/index"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/signup"/>

@@ -15,14 +15,39 @@ public class NewCommentRequet extends AbstractRequest {
     Integer commentType;
     @JsonProperty("related_id")
     Long relatedId;
-    @JsonProperty("publish_timestamp")
-    Long publishTimestamp;
+    @JsonProperty("time")
+    String publishTimestamp;
     @JsonProperty("user_id")
     Long userId;
+    @JsonProperty("name")
+    String username;
+
     @JsonProperty("commented_user_id")
     Long commentedUserId;
 
+    @JsonProperty("reply_to")
+    String commentedUsername;
+
     String content;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public NewCommentRequet setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public String getCommentedUsername() {
+        return commentedUsername;
+    }
+
+    public NewCommentRequet setCommentedUsername(String commentedUsername) {
+        this.commentedUsername = commentedUsername;
+        return this;
+    }
 
     public Integer getCommentType() {
         return commentType;
@@ -42,11 +67,11 @@ public class NewCommentRequet extends AbstractRequest {
         return this;
     }
 
-    public Long getPublishTimestamp() {
+    public String getPublishTimestamp() {
         return publishTimestamp;
     }
 
-    public NewCommentRequet setPublishTimestamp(Long publishTimestamp) {
+    public NewCommentRequet setPublishTimestamp(String publishTimestamp) {
         this.publishTimestamp = publishTimestamp;
         return this;
     }

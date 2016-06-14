@@ -14,7 +14,6 @@ import java.security.InvalidParameterException;
  */
 
 public class MachineDetail extends MachineDto {
-    private Long machineId;
     private String detail;
 
     public MachineDetail() {
@@ -31,6 +30,7 @@ public class MachineDetail extends MachineDto {
                 .setLicenseType(machineDto.getLicenseType())
                 .setMachineType(machineDto.getMachineType())
                 .setMachineName(machineDto.getMachineName())
+                .setMachinePowerType(machineDto.getMachinePowerType())
                 .setMachinePower(machineDto.getMachinePower())
                 .setPassengerNum(machineDto.getPassengerNum())
                 .setWheelDistance(machineDto.getWheelDistance())
@@ -46,15 +46,6 @@ public class MachineDetail extends MachineDto {
                 .setMachineLicense1(machineDto.getMachineLicense1())
                 .setMachineLicense2(machineDto.getMachineLicense2())
         ;
-    }
-
-    public Long getMachineId() {
-        return machineId;
-    }
-
-    public MachineDetail setMachineId(Long machineId) {
-        this.machineId = machineId;
-        return this;
     }
 
     public String getDetail() {
@@ -82,13 +73,14 @@ public class MachineDetail extends MachineDto {
                     .setLicenseType(machine.getLicenseType())
                     .setMachineType(machine.getMachineType())
                     .setMachineName(machine.getMachineName())
+                    .setMachinePowerType(machine.getMachinePowerType())
                     .setMachinePower(machine.getMachinePower())
                     .setPassengerNum(machine.getPassengerNum())
-                    .setWheelDistance(machine.getWheelDistance())
+                    .setWheelDistance(machine.getWheelDistance().intValue())
                     .setCheckTime(machine.getCheckTime())
                     .setPayType(machine.getPayType())
                     .setLeaseMonth(machine.getLeaseMonth())
-                    .setLeaseTime(machine.getLeaseTime())
+                    .setLeaseTime(machine.getLeaseTime().intValue())
                     .setWorkCondition(machine.getWorkCondition())
                     .setNeedType(machine.getNeedType())
                     .setWithItem(machine.getWithItem())

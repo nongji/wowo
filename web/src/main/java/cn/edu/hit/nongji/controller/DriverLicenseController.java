@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 
 /**
  * @author fangwentong
- * @title DriverLisenceController
+ * @title DriverLicenseController
  * @desc 驾照控制器类
  * @since 2016-05-29 18:25
  */
 
 @Controller
-public class DriverLisenceController extends AbstractCommonController {
+public class DriverLicenseController extends AbstractCommonController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DriverLisenceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(DriverLicenseController.class);
 }

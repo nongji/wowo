@@ -5,9 +5,9 @@
 <mapper namespace="cn.edu.hit.nongji.dao.CommentDao">
     <insert id="addNewComment" parameterType="cn.edu.hit.nongji.po.Comment" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO wowo.comment
-        (publish_time, type, related_id, parent_id, user_id, commentted_user_id, content)
+        (publish_time, type, related_id, parent_id, user_id, username, commentted_user_id, commentted_username, content)
         VALUE
-        (#{publishTime}, #{type}, #{relatedId}, #{parentId}, #{userId}, {commenttedUserId}, #{content})
+        (#{publishTime}, #{type}, #{relatedId}, #{parentId}, #{userId}, #{username}, #{commenttedUserId}, #{commenttedUsername}, #{content})
     </insert>
 
     <select id="getCommentByTypeAndRelatedId" resultType="cn.edu.hit.nongji.po.Comment">
@@ -32,6 +32,16 @@
     <select id="getCommentByCommentedUserId" resultType="cn.edu.hit.nongji.po.Comment">
         SELECT * FROM wowo.comment
         WHERE commentted_user_id = #{param1}
+    </select>
+
+    <select id="getCommentByCommentedUsername" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE commentted_username = #{param1}
+    </select>
+
+    <select id="getCommentByUserId" resultType="cn.edu.hit.nongji.po.Comment">
+        SELECT * FROM wowo.comment
+        WHERE user_id = #{param1}
     </select>
 
     <delete id="deleteCommentsByTypeAndRelatedId">

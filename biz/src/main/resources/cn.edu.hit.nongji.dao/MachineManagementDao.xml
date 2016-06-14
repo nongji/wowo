@@ -18,6 +18,79 @@
         )
     </insert>
 
+    <update id="updateMachine" parameterType="cn.edu.hit.nongji.po.Machine">
+        UPDATE wowo.machine
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="driveType != null">
+                drive_type = #{driveType},
+            </if>
+            <if test="driverName != null">
+                driver_name = #{driverName},
+            </if>
+            <if test="driverAge != null">
+                driver_age = #{driverAge},
+            </if>
+            <if test="driverGender != null">
+                driver_gender = #{driverGender},
+            </if>
+            <if test="licenseType != null">
+                license_type = #{licenseType},
+            </if>
+            <if test="machineName !=null">
+                machine_name = #{machineName},
+            </if>
+            <if test="machinePowerType != null">
+                machine_power_type = #{machinePowerType},
+            </if>
+            <if test="machinePower != null">
+                machine_power = #{machinePower},
+            </if>
+            <if test="passengerNum != null">
+                passenger_num = #{passengerNum},
+            </if>
+            <if test="wheelDistance != null">
+                wheel_distance = #{wheelDistance},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType},
+            </if>
+            <if test="leaseMonth != null">
+                lease_month = #{leaseMonth},
+            </if>
+            <if test="leaseTime != null">
+                lease_time = #{leaseTime},
+            </if>
+            <if test="workCondition != null">
+                work_condition = #{workCondition},
+            </if>
+            <if test="needType != null">
+                need_type = #{needType},
+            </if>
+            <if test="withItem != null">
+                with_item = #{withItem},
+            </if>
+            <if test="houseType != null">
+                house_type = #{houseType},
+            </if>
+            <if test="driverLicense != null">
+                driver_license = #{driverLicense},
+            </if>
+            <if test="machineLicense1 != null">
+                machine_license1 = #{machineLicense1},
+            </if>
+            <if test="machineLicense2 != null">
+                machine_license2 = #{machineLicense2},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
     <select id="getRegisteredMachineByUserId" resultType="cn.edu.hit.nongji.po.Machine">
         SELECT * from wowo.machine
         WHERE user_id = #{param1}

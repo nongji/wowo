@@ -51,6 +51,14 @@ public class MachineManagementServiceImpl implements MachineManagementService {
         return machine.getId();
     }
 
+    @Override
+    public void updateMachine(long machineId, MachineRegisterRequest registerRequest) {
+        Machine machine  = Machine.fromMachineRegisterRequest(registerRequest);
+        machine.setId(machineId);
+        machineManagementDao.updateMachine(machine);
+
+    }
+
     /**
      * 获取指定用户所有注册机器的信息
      *
@@ -65,7 +73,11 @@ public class MachineManagementServiceImpl implements MachineManagementService {
         List<Machine> machines = machineManagementDao.getRegisteredMachineByUserId(userId);
         List<MachineDto> result = Lists.newArrayListWithExpectedSize(machines.size());
         for (Machine machine : machines) {
-            result.add(MachineDto.fromMachine(machine));
+            MachineDto machineDto = MachineDto.fromMachine(machine);
+            machineDto.setDriverLicense(assetManagementService.getAssetByAssetId(machine.getDriverLicense()))
+                    .setMachineLicense1(assetManagementService.getAssetByAssetId(machine.getMachineLicense1()))
+                    .setMachineLicense2(assetManagementService.getAssetByAssetId(machine.getMachineLicense2()));
+            result.add(machineDto);
         }
         return result;
     }

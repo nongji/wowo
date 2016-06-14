@@ -1,5 +1,6 @@
 package cn.edu.hit.nongji.util;
 
+import cn.edu.hit.nongji.conf.BizConf;
 import cn.edu.hit.nongji.dto.LoginUser;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +24,10 @@ public final class ThreadLocalHelper {
     }
 
     public static SimpleDateFormat getDateFormat() {
+        SimpleDateFormat sdf = dateFormat.get();
+        if (sdf == null) {
+            setDateFormat(new SimpleDateFormat(BizConf.DEFAULT_DATE_TIME_STYLE));
+        }
         return dateFormat.get();
     }
 

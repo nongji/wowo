@@ -56,6 +56,12 @@ public interface CommentDao {
      */
     List<Comment> getCommentByCommentedUserId(long commentedUserId);
 
+
+    List<Comment> getCommentByCommentedUsername(String username);
+
+
+    List<Comment> getCommentByUserId(long userId);
+
     /**
      * 根据评论类型和被评论实体id删除评论
      *

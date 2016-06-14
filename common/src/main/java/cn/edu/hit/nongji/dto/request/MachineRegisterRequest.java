@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * @author fangwentong
@@ -18,7 +17,11 @@ public class MachineRegisterRequest extends AbstractRequest {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
+    @JsonProperty("user_id")
     Long userId;
+
+    @JsonProperty("machine_id")
+    Long machineId;
 
     @JsonProperty("user_type")
     Integer userType; // 用户类型
@@ -48,7 +51,7 @@ public class MachineRegisterRequest extends AbstractRequest {
     @JsonProperty("machine_wheeldistance")
     Double wheelDistance; // 轮距
     @JsonProperty("machine_checktime")
-    Date checkTime; // 上次检查时间
+    Integer checkTime; // 上次检查时间
 
     @JsonProperty("machine_paytype")
     Integer payType; // 支付方式
@@ -81,6 +84,8 @@ public class MachineRegisterRequest extends AbstractRequest {
     public static MachineRegisterRequest fromJsonString(String jsonString) throws IOException {
         return objectMapper.readValue(jsonString, MachineRegisterRequest.class);
     }
+
+
 
     @Override
     public String toString() {
@@ -204,11 +209,11 @@ public class MachineRegisterRequest extends AbstractRequest {
         return this;
     }
 
-    public Date getCheckTime() {
+    public Integer getCheckTime() {
         return checkTime;
     }
 
-    public MachineRegisterRequest setCheckTime(Date checkTime) {
+    public MachineRegisterRequest setCheckTime(Integer checkTime) {
         this.checkTime = checkTime;
         return this;
     }

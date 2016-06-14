@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface QuotationDao {
     int addNewQuotation(Quotation quotation);
 
-    Quotation getQuotationByQuotation(long quotationId);
+    Quotation getQuotationByQuotation(Long quotationId);
 
 }

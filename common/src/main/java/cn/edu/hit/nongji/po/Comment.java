@@ -19,10 +19,30 @@ public class Comment implements Serializable {
     private Long relatedId;  // 评论关联id
     private Long parentId; // 父评论id
     private Long userId; // 回复发起用户的userId
+    private String username; // 用户名
     private Long commenttedUserId; // 被回复的用户
+    private String commenttedUsername; // 被回复的用户名
+
 
     private String content; // 回复内容
 
+    public String getUsername() {
+        return username;
+    }
+
+    public Comment setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public String getCommenttedUsername() {
+        return commenttedUsername;
+    }
+
+    public Comment setCommenttedUsername(String commenttedUsername) {
+        this.commenttedUsername = commenttedUsername;
+        return this;
+    }
 
     public Long getId() {
         return id;

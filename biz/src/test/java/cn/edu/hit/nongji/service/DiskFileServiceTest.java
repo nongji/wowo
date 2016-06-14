@@ -9,9 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author fangwentong
@@ -48,9 +46,12 @@ public class DiskFileServiceTest extends ServiceTestBase {
         }
 
         FileOutputStream out = new FileOutputStream(file);
-        out.write("Hello, World".getBytes());
-        out.flush();
-        out.close();
+        try {
+            out.write("Hello, World".getBytes());
+        } finally {
+            out.flush();
+            out.close();
+        }
         return new File(filename);
     }
 

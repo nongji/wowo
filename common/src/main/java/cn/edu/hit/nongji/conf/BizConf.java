@@ -10,4 +10,5 @@ package cn.edu.hit.nongji.conf;
 public class BizConf {
     public static final String DEFAULT_SQL_TIMESTAMP_STYLE = "yyyy-MM-dd HH:mm:ss";
     public static final String DEFAULT_SQL_DATE_STYLE = "yyyy-MM-dd";
+    public static final String DEFAULT_DATE_TIME_STYLE = "yyyy-MM-dd HH:mm:ss";
 }

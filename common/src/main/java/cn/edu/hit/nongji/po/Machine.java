@@ -4,7 +4,6 @@ import cn.edu.hit.nongji.dto.request.MachineRegisterRequest;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author fangwentong
@@ -32,7 +31,7 @@ public class Machine implements Serializable {
 
     Integer passengerNum; // 最大乘客数量
     Double wheelDistance; // 轮距
-    Date checkTime; // 上次检查时间
+    Integer checkTime; // 上次检查时间
 
     Integer payType; // 支付方式
     Integer leaseMonth; // 租赁月数
@@ -175,11 +174,11 @@ public class Machine implements Serializable {
         return this;
     }
 
-    public Date getCheckTime() {
+    public Integer getCheckTime() {
         return checkTime;
     }
 
-    public Machine setCheckTime(Date checkTime) {
+    public Machine setCheckTime(Integer checkTime) {
         this.checkTime = checkTime;
         return this;
     }

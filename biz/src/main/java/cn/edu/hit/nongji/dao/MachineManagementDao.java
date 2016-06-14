@@ -71,4 +71,6 @@ public interface MachineManagementDao {
      */
     Machine getMachineByMachineIdAndUserId(Long userId, Long machineId);
 
+
+    void updateMachine(Machine machine);
 }

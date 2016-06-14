@@ -1,10 +1,10 @@
 package cn.edu.hit.nongji.dto;
 
 import cn.edu.hit.nongji.po.Machine;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author fangwentong
@@ -14,38 +14,62 @@ import java.util.Date;
  */
 
 public class MachineDto implements Serializable {
+
     Long id;
+    @JsonProperty("user_type")
     Integer userType; // 用户类型
+    @JsonProperty("drive_type")
     Integer driveType; // 驱动类型
 
+    @JsonProperty("driver_name")
     String driverName; // 司机姓名
+    @JsonProperty("driver_age")
     Integer driverAge;  // 司机年龄
+    @JsonProperty("driver_gender")
     Integer driverGender; // 司机性别
 
+    @JsonProperty("driver_license_type")
     String licenseType; //
+    @JsonProperty("machine_type")
     String machineType; //  机器类型
+    @JsonProperty("machine_name")
     String machineName; // 机器名称
 
+    @JsonProperty("machine_powertype")
     Integer machinePowerType; // 动力类型
+    @JsonProperty("machine_power")
     Integer machinePower; // 机器马力
 
+    @JsonProperty("passenger_num")
     Integer passengerNum; // 最大乘客数量
-    Double wheelDistance; // 轮距
-    Date checkTime; // 上次检查时间
+    @JsonProperty("machine_wheeldistance")
+    Integer wheelDistance; // 轮距
+    @JsonProperty("machine_checktime")
+    Integer checkTime; // 上次检查时间
 
+    @JsonProperty("machine_paytype")
     Integer payType; // 支付方式
+    @JsonProperty("lease_month")
     Integer leaseMonth; // 租赁月数
-    Double leaseTime; // 租赁时间
+    @JsonProperty("lease_time")
+    Integer leaseTime; // 租赁时间
 
+    @JsonProperty("work_condition")
     String workCondition; // 工作环境
 
+    @JsonProperty("need_type")
     Integer needType;
+    @JsonProperty("with_item")
     Integer withItem;
+    @JsonProperty("house_type")
     Integer houseType;
 
 
+    @JsonProperty("driver_license")
     String driverLicense;
+    @JsonProperty("machine_license1")
     String machineLicense1;
+    @JsonProperty("machine_license2")
     String machineLicense2;
 
     public Long getId() {
@@ -156,20 +180,20 @@ public class MachineDto implements Serializable {
         return this;
     }
 
-    public Double getWheelDistance() {
+    public Integer getWheelDistance() {
         return wheelDistance;
     }
 
-    public MachineDto setWheelDistance(Double wheelDistance) {
+    public MachineDto setWheelDistance(Integer wheelDistance) {
         this.wheelDistance = wheelDistance;
         return this;
     }
 
-    public Date getCheckTime() {
+    public Integer getCheckTime() {
         return checkTime;
     }
 
-    public MachineDto setCheckTime(Date checkTime) {
+    public MachineDto setCheckTime(Integer checkTime) {
         this.checkTime = checkTime;
         return this;
     }
@@ -192,11 +216,11 @@ public class MachineDto implements Serializable {
         return this;
     }
 
-    public Double getLeaseTime() {
+    public Integer getLeaseTime() {
         return leaseTime;
     }
 
-    public MachineDto setLeaseTime(Double leaseTime) {
+    public MachineDto setLeaseTime(Integer leaseTime) {
         this.leaseTime = leaseTime;
         return this;
     }
@@ -284,11 +308,11 @@ public class MachineDto implements Serializable {
                 .setMachinePowerType(machine.getMachinePowerType())
                 .setMachinePower(machine.getMachinePower())
                 .setPassengerNum(machine.getPassengerNum())
-                .setWheelDistance(machine.getWheelDistance())
+                .setWheelDistance(machine.getWheelDistance().intValue())
                 .setCheckTime(machine.getCheckTime())
                 .setPayType(machine.getPayType())
                 .setLeaseMonth(machine.getLeaseMonth())
-                .setLeaseTime(machine.getLeaseTime())
+                .setLeaseTime(machine.getLeaseTime().intValue())
                 .setWorkCondition(machine.getWorkCondition())
                 .setNeedType(machine.getNeedType())
                 .setWithItem(machine.getWithItem())

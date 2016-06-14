@@ -22,6 +22,7 @@ public interface MachineManagementService {
      */
     long addNewMachine(MachineRegisterRequest registerRequest);
 
+    void updateMachine(long machineId, MachineRegisterRequest registerRequest);
     /**
      * 获取指定用户所有注册机器的信息
      *

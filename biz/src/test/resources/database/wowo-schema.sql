@@ -57,10 +57,10 @@ CREATE TABLE wowo.machine (
   machine_type     varchar(255)       COMMENT '机器类型',
   machine_name     VARCHAR(255)  DEFAULT ''COMMENT '机器名称',
   machine_power_type    TINYINT (4)  COMMENT '机器动力类型',
-  machine_power    TINYINT (4)  COMMENT '机器马力',
+  machine_power    INT (7)  COMMENT '机器马力',
   passenger_num    TINYINT (3)  COMMENT '可载客数量',
   wheel_distance   DOUBLE        COMMENT '轮距',
-  check_time       TIMESTAMP     COMMENT '',
+  check_time       int(11)     COMMENT '有效年限',
   pay_type         TINYINT (3)  COMMENT '支付方式',
   lease_month      INT(5) COMMENT '租赁月份',
   lease_time       DOUBLE COMMENT '租赁时间',
@@ -129,7 +129,9 @@ CREATE TABLE wowo.comment (
   related_id int(11)  DEFAULT 0 COMMENT '评论关联id',
   parent_id int(11)  DEFAULT 0 COMMENT '父评论id',
   user_id int(11)  DEFAULT 0 COMMENT '回复发起用户的userId',
+  username varchar(255) DEFAULT '' COMMENT '回复发起用户的用户名',
   commentted_user_id int(11)  DEFAULT 0 COMMENT '被回复的用户',
+  commentted_username varchar(255) DEFAULT '' COMMENT '被回复用户名',
   content varchar(1023)  DEFAULT '' COMMENT '用户回复内容',
 
   PRIMARY KEY (id)

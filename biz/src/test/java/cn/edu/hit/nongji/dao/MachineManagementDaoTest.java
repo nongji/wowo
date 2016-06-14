@@ -37,7 +37,7 @@ public class MachineManagementDaoTest extends DaoTestBase {
 
     @Test
     public void testGetMachineDetailByMachineId() {
-        Machine machine = new Machine().setUserId(1L).setDriverLicense(10L);
+        Machine machine = new Machine().setUserId(1L).setDriverLicense(10L).setMachinePowerType(2);
 
         machineManagementDao.addNewMachine(machine);
         Long machineId = machine.getId();
@@ -48,5 +48,18 @@ public class MachineManagementDaoTest extends DaoTestBase {
         System.out.println(machineSelected);
         assertNotNull(machineSelected.getUserId());
         assertNotNull(machineSelected.getDriverLicense());
+        assertNotNull(machineSelected.getMachinePowerType());
+    }
+
+    @Test
+    public void testUpdateMachine() {
+        long machineId = 1;
+        Machine machine = new Machine().setId(machineId)
+                .setUserId(1L)
+                .setMachineLicense1(12L)
+                .setMachineName("hello")
+                ;
+
+        machineManagementDao.updateMachine(machine);
     }
 }
